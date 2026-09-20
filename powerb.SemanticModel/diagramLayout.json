@@ -1,0 +1,126 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 558.03104982724767,
+            "y": -50
+          },
+          "nodeIndex": "dwh dim_agence",
+          "nodeLineageTag": "934d2995-440b-4408-9291-4c7d80181f6e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 842.41923676747808,
+            "y": -24.69908923197363
+          },
+          "nodeIndex": "dwh dim_client",
+          "nodeLineageTag": "f80a815a-6a05-44fb-b823-faba010a9cb3",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 683.858230703612,
+            "y": 373.29621748932658
+          },
+          "nodeIndex": "dwh dim_compte",
+          "nodeLineageTag": "07c89654-ed73-45ff-8ade-ef4f1a68b35b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 303.40627804304688,
+            "y": 657.41081871793585
+          },
+          "nodeIndex": "dwh dim_produit",
+          "nodeLineageTag": "e5f9a6c1-38c4-43ea-9ab5-1d87a162b15e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 303.64890160156949
+          },
+          "nodeIndex": "dwh dim_temps",
+          "nodeLineageTag": "cb1a10b2-cbbb-4190-9504-c23df2c0b60a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 397.95130902621486,
+            "y": 303.68402868715589
+          },
+          "nodeIndex": "dwh fact_transaction",
+          "nodeLineageTag": "a57b2714-037d-47bb-b746-6c4d67b399b8",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1076.4192367674782,
+            "y": 353.70540935896793
+          },
+          "nodeIndex": "_Mesures",
+          "nodeLineageTag": "1a6203b4-107e-4e4b-ba9b-399efee87e7e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1360.4192367674782,
+            "y": 403.70540935896793
+          },
+          "nodeIndex": "Seuil Risque",
+          "nodeLineageTag": "0a9b4070-b974-4566-830d-641a7252f6ca",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 70.95554390096882,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}

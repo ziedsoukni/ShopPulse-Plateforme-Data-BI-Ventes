@@ -1,0 +1,125 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "46e9d237-50f8-48e6-b2f6-7c8aa523412b",
+  "position": {
+    "x": 1380,
+    "y": 630,
+    "z": 1000,
+    "width": 520,
+    "height": 440,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dwh dim_agence"
+                    }
+                  },
+                  "Property": "nom_agence"
+                }
+              },
+              "queryRef": "dwh dim_agence.nom_agence",
+              "nativeQueryRef": "nom_agence"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Nb Comptes Actifs"
+                }
+              },
+              "queryRef": "_Mesures.Nb Comptes Actifs",
+              "nativeQueryRef": "Nb Comptes Actifs"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "Montant Total Transactions"
+                }
+              },
+              "queryRef": "_Mesures.Montant Total Transactions",
+              "nativeQueryRef": "Montant Total Transactions"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Mesures"
+                    }
+                  },
+                  "Property": "% Objectif Agence"
+                }
+              },
+              "queryRef": "_Mesures.% Objectif Agence",
+              "nativeQueryRef": "% Objectif Agence"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Classement des agences'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DCE9F7'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

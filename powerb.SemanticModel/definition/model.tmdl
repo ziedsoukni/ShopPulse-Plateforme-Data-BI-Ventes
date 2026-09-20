@@ -1,0 +1,33 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dwh dim_agence","dwh dim_client","dwh dim_compte","dwh dim_produit","dwh dim_temps","dwh fact_transaction"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'dwh dim_agence'
+ref table DateTableTemplate_d5172161-7990-4a39-8bce-43efdfb704b2
+ref table LocalDateTable_90775b1a-072d-4feb-9e81-ff9fb819771c
+ref table 'dwh dim_client'
+ref table 'dwh dim_compte'
+ref table LocalDateTable_143deb1f-8b17-45d1-979d-7487ab966ee2
+ref table LocalDateTable_e7b1d40f-8dd6-4a90-846d-d9ce6e220d7b
+ref table LocalDateTable_3505fb09-338e-4fe0-8b87-2f91fd690d4c
+ref table 'dwh dim_produit'
+ref table 'dwh dim_temps'
+ref table LocalDateTable_d3eb3556-9e47-45c7-976c-008a502fd35f
+ref table 'dwh fact_transaction'
+ref table LocalDateTable_d2647b0b-0081-42d6-a0d8-d32250c6cfbc
+ref table _Mesures
+ref table 'Seuil Risque'
+
+ref cultureInfo fr-FR
+

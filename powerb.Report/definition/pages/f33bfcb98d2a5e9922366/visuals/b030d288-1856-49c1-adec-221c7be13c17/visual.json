@@ -1,0 +1,139 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "name": "b030d288-1856-49c1-adec-221c7be13c17",
+  "position": {
+    "x": 1380,
+    "y": 630,
+    "z": 1000,
+    "width": 520,
+    "height": 440,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dwh fact_transaction"
+                    }
+                  },
+                  "Property": "id_transaction"
+                }
+              },
+              "queryRef": "dwh fact_transaction.id_transaction",
+              "nativeQueryRef": "id_transaction"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dwh fact_transaction"
+                    }
+                  },
+                  "Property": "montant"
+                }
+              },
+              "queryRef": "dwh fact_transaction.montant",
+              "nativeQueryRef": "montant"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dwh fact_transaction"
+                    }
+                  },
+                  "Property": "motif_rejet"
+                }
+              },
+              "queryRef": "dwh fact_transaction.motif_rejet",
+              "nativeQueryRef": "motif_rejet"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dwh fact_transaction"
+                    }
+                  },
+                  "Property": "canal"
+                }
+              },
+              "queryRef": "dwh fact_transaction.canal",
+              "nativeQueryRef": "canal"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dwh fact_transaction"
+                    }
+                  },
+                  "Property": "risque_transaction"
+                }
+              },
+              "queryRef": "dwh fact_transaction.risque_transaction",
+              "nativeQueryRef": "risque_transaction"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Table des alertes'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#DCE9F7'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+/// Table paramètre héritée, désormais inutilisée : le filtre de risque de la page 3 s'appuie sur la colonne Statut_Risque de fact_transaction. Masquée pour ne pas polluer le volet Données.
+table 'Seuil Risque'
+	isHidden
+	lineageTag: 0a9b4070-b974-4566-830d-641a7252f6ca
+
+	column Value
+		isNameInferred
+		sourceColumn: [Value]
+
+	partition 'Seuil Risque' = calculated
+		mode: import
+		source = GENERATESERIES(0, 100, 1)
+
+	annotation PBI_ResultType = Table
+

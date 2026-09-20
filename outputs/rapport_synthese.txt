@@ -1,0 +1,17 @@
+======================================================================
+RAPPORT DE SYNTHESE - PREVISION DE L'ACTIVITE BANCAIRE
+======================================================================
+
+--- Montant total (TND) ---
+Modèle : Prophet
+Fiabilité du modèle (backtest) : MAPE = 30.9%
+Total réel 2025 : 3,709,755
+Total prévu 2026 : 6,880,407  (évolution vs 2025 : +85.5%)
+Total prévu 2027 : 10,034,521  (évolution vs 2025 : +170.5%)
+
+--- Nombre de transactions ---
+Modèle : Prophet
+Fiabilité du modèle (backtest) : MAPE = 31.4%
+Total réel 2025 : 12,942
+Total prévu 2026 : 24,501  (évolution vs 2025 : +89.3%)
+Total prévu 2027 : 35,977  (évolution vs 2025 : +178.0%)

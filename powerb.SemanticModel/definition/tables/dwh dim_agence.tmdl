@@ -1,0 +1,105 @@
+table 'dwh dim_agence'
+	lineageTag: 934d2995-440b-4408-9291-4c7d80181f6e
+
+	column id_agence
+		dataType: string
+		lineageTag: 0bc154ba-cb8d-4f80-8b33-d52560f9b8b2
+		summarizeBy: none
+		sourceColumn: id_agence
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_agence
+		dataType: string
+		lineageTag: b3a04e80-64d1-4051-a7de-e9476ce808e4
+		summarizeBy: none
+		sourceColumn: code_agence
+
+		annotation SummarizationSetBy = Automatic
+
+	column nom_agence
+		dataType: string
+		lineageTag: bbf631f8-6181-4f8f-b7f7-f5dc097e0a0e
+		summarizeBy: none
+		sourceColumn: nom_agence
+
+		annotation SummarizationSetBy = Automatic
+
+	column ville
+		dataType: string
+		lineageTag: 357707ff-c669-401f-89fa-906f5d5d3654
+		summarizeBy: none
+		sourceColumn: ville
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 95606064-3f3b-4a93-bb65-33d2f046cda9
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column type_agence
+		dataType: string
+		lineageTag: e29065fb-638a-44d2-938a-54826031d32f
+		summarizeBy: none
+		sourceColumn: type_agence
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre_employes
+		dataType: int64
+		formatString: 0
+		lineageTag: d4c6c8f8-3a7d-45c5-a467-b3af9579327c
+		summarizeBy: sum
+		sourceColumn: nombre_employes
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_ouverture
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2cbc62e8-3214-4f83-83ed-4601cf761a27
+		summarizeBy: none
+		sourceColumn: date_ouverture
+
+		variation Variation
+			isDefault
+			relationship: 310032c5-8a5a-4633-ba27-71b6b64f4ee4
+			defaultHierarchy: LocalDateTable_90775b1a-072d-4feb-9e81-ff9fb819771c.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column statut
+		dataType: string
+		lineageTag: 2f84ad4d-225e-41f5-90a1-9cdb39a9bfad
+		summarizeBy: none
+		sourceColumn: statut
+
+		annotation SummarizationSetBy = Automatic
+
+	column objectif_mensuel
+		dataType: double
+		lineageTag: 48445cfd-fb2a-4c0b-9232-2df23a042af1
+		summarizeBy: sum
+		sourceColumn: objectif_mensuel
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'dwh dim_agence' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "PFEE"),
+				    dwh_dim_agence = Source{[Schema="dwh",Item="dim_agence"]}[Data]
+				in
+				    dwh_dim_agence
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,218 @@
+table 'dwh fact_transaction'
+	lineageTag: a57b2714-037d-47bb-b746-6c4d67b399b8
+
+	column id_transaction
+		dataType: string
+		lineageTag: 37a4d521-6a6e-4470-8c61-4429baac3c76
+		summarizeBy: none
+		sourceColumn: id_transaction
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1a4d981d-985c-4360-b6fc-9526b5b3edb1
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 1058b79e-08ac-428d-a1cb-bd2e83eaac4b
+			defaultHierarchy: LocalDateTable_d2647b0b-0081-42d6-a0d8-d32250c6cfbc.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column heure
+		dataType: string
+		lineageTag: d795b900-1e61-4caa-93f8-69a92366d088
+		summarizeBy: none
+		sourceColumn: heure
+
+		annotation SummarizationSetBy = Automatic
+
+	column montant
+		dataType: double
+		lineageTag: 1e8516dd-5d60-4baf-b1a3-d6273f4c9681
+		summarizeBy: sum
+		sourceColumn: montant
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column type_operation
+		dataType: string
+		lineageTag: 0bbd80cf-2894-461b-932b-14eda7075a1e
+		summarizeBy: none
+		sourceColumn: type_operation
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_compte
+		dataType: string
+		lineageTag: 8166f40f-8bdf-498f-b297-1c88182a9f4e
+		summarizeBy: none
+		sourceColumn: id_compte
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_agence
+		dataType: string
+		lineageTag: 92945786-4058-472f-ab72-009f77a613d1
+		summarizeBy: none
+		sourceColumn: id_agence
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_produit
+		dataType: string
+		lineageTag: 03d491c2-120e-4d5b-8861-c457851c7834
+		summarizeBy: none
+		sourceColumn: id_produit
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal
+		dataType: string
+		lineageTag: 6088ca24-ba75-449d-8c9d-3db7e3a339e9
+		summarizeBy: none
+		sourceColumn: canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column statut_transaction
+		dataType: string
+		lineageTag: 1e08c9f6-3080-4ce1-a762-8144288a836b
+		summarizeBy: none
+		sourceColumn: statut_transaction
+
+		annotation SummarizationSetBy = Automatic
+
+	column frais_transaction
+		dataType: double
+		lineageTag: 15627d50-8381-4fcc-b52d-ce8561476033
+		summarizeBy: sum
+		sourceColumn: frais_transaction
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column devise
+		dataType: string
+		lineageTag: 0ad46474-6496-4616-a6ee-6525b6663af9
+		summarizeBy: none
+		sourceColumn: devise
+
+		annotation SummarizationSetBy = Automatic
+
+	column solde_avant
+		dataType: double
+		lineageTag: dd9990a6-4027-491c-860c-a22bf32c803d
+		summarizeBy: sum
+		sourceColumn: solde_avant
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column solde_apres
+		dataType: double
+		lineageTag: 424f4971-1c27-4255-bbdb-60f5bc9eedfd
+		summarizeBy: sum
+		sourceColumn: solde_apres
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column moyen_paiement
+		dataType: string
+		lineageTag: 0f1f727b-2deb-41c4-b713-b65a65719ed6
+		summarizeBy: none
+		sourceColumn: moyen_paiement
+
+		annotation SummarizationSetBy = Automatic
+
+	column localisation
+		dataType: string
+		lineageTag: fa01da72-98f2-4765-9953-84d68127d6f9
+		summarizeBy: none
+		sourceColumn: localisation
+
+		annotation SummarizationSetBy = Automatic
+
+	column duree_transaction
+		dataType: double
+		lineageTag: 03a67781-3f03-4e27-9d31-3d7d16a9fc68
+		summarizeBy: sum
+		sourceColumn: duree_transaction
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column risque_transaction
+		dataType: int64
+		formatString: 0
+		lineageTag: e5771020-13ac-49f3-9ead-bcf6f68a899a
+		summarizeBy: sum
+		sourceColumn: risque_transaction
+
+		annotation SummarizationSetBy = Automatic
+
+	column anomalie
+		dataType: int64
+		formatString: 0
+		lineageTag: 90470f8a-5fd7-4997-b5e4-3368740fd5b3
+		summarizeBy: sum
+		sourceColumn: anomalie
+
+		annotation SummarizationSetBy = Automatic
+
+	column motif_rejet
+		dataType: string
+		lineageTag: dde9a8f4-f9f1-4869-9e50-c3427eeefcf0
+		summarizeBy: none
+		sourceColumn: motif_rejet
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_date
+		dataType: int64
+		formatString: 0
+		lineageTag: 8da1409f-d3c8-4b85-bc1c-d7270727c827
+		summarizeBy: none
+		sourceColumn: sk_date
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Heure de la transaction en entier (0-23), extraite de la colonne texte 'heure' (stockée en VARCHAR HH:MM:SS côté ETL). Utilisée pour la carte de chaleur heure x jour de la semaine.
+	column Heure_Entiere = VALUE(LEFT('dwh fact_transaction'[heure], 2))
+		dataType: int64
+		formatString: 0
+		displayFolder: Colonnes calculées
+		lineageTag: f46438ec-ec45-4a53-b712-b518dd4d2799
+		summarizeBy: none
+
+	/// Statut de risque lisible (Faible/Moyen/Élevé) dérivé de risque_transaction. Seuils 40 et 70 à valider avec le métier (voir spec client, section 3.3).
+	column Statut_Risque = SWITCH(TRUE(), 'dwh fact_transaction'[risque_transaction] < 40, "Faible", 'dwh fact_transaction'[risque_transaction] < 70, "Moyen", "Élevé")
+		dataType: string
+		displayFolder: Colonnes calculées
+		lineageTag: 2425e5e2-0be4-43b5-aba7-ac08fddf9f19
+		summarizeBy: none
+
+	partition 'dwh fact_transaction' = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "PFEE"),
+				    dwh_fact_transaction = Source{[Schema="dwh",Item="fact_transaction"]}[Data]
+				in
+				    dwh_fact_transaction
+
+	annotation PBI_ResultType = Table
+

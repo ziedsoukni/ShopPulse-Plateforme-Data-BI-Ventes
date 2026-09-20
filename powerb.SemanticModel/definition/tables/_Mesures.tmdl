@@ -1,0 +1,112 @@
+/// Table technique vide servant uniquement de conteneur pour les mesures DAX du dashboard (bonne pratique de modélisation).
+table _Mesures
+	isHidden
+	lineageTag: 1a6203b4-107e-4e4b-ba9b-399efee87e7e
+
+	/// Nombre de clients distincts.
+	measure 'Nb Clients' = DISTINCTCOUNT('dwh dim_client'[id_client])
+		formatString: #,##0
+		displayFolder: 01 Activité
+		lineageTag: 0fc11c3b-85e1-4cc6-8122-a6101beffe0b
+
+	/// Comptes dont statut = "Actif". Valeur "Actif" à confirmer (voir vérification point par point, section 8 de la spec).
+	measure 'Nb Comptes Actifs' = CALCULATE(COUNTROWS('dwh dim_compte'), 'dwh dim_compte'[statut] = "Actif")
+		formatString: #,##0
+		displayFolder: 01 Activité
+		lineageTag: 1a3366d5-f877-49bd-8540-5df875285277
+
+	/// Volume de transactions sur la période filtrée.
+	measure 'Nb Transactions' = COUNTROWS('dwh fact_transaction')
+		formatString: #,##0
+		displayFolder: 01 Activité
+		lineageTag: ca5d9348-9274-4c58-9f78-1fef4b1ebf69
+
+	/// Montant total transigé. Attention : ne convertit pas les devises si plusieurs coexistent (voir spec, section 3.3).
+	measure 'Montant Total Transactions' = SUM('dwh fact_transaction'[montant])
+		formatString: #,##0.00
+		displayFolder: 01 Activité
+		lineageTag: f0d9728a-dbda-49cd-8eba-8d5b58ff6a1d
+
+	/// PROXY en attendant la définition métier de « encours agence » (voir spec, section 5.1) : utilise ici le montant des transactions de la période plutôt qu'un encours de comptes. À remplacer dès que la définition est validée.
+	measure '% Objectif Agence' = DIVIDE([Montant Total Transactions], SUM('dwh dim_agence'[objectif_mensuel]), 0)
+		formatString: 0.0%
+		displayFolder: 01 Activité
+		lineageTag: 17dd097b-e1c8-44ba-8ea8-077e760064c3
+
+	/// Revenu mensuel moyen par client distinct.
+	measure 'Revenu Moyen Client' = AVERAGEX(VALUES('dwh dim_client'[id_client]), CALCULATE(AVERAGE('dwh dim_client'[revenu_mensuel])))
+		formatString: #,##0.00
+		displayFolder: 02 Rentabilité
+		lineageTag: 75fec29c-84a7-4f72-ba03-3f0410c677fa
+
+	/// Frais de transaction + frais mensuels des comptes.
+	measure 'Frais Totaux Percus' = SUM('dwh fact_transaction'[frais_transaction]) + SUM('dwh dim_compte'[frais_mensuels])
+		formatString: #,##0.00
+		displayFolder: 02 Rentabilité
+		lineageTag: c63594a5-4089-4fbd-aa29-1038f284064f
+
+	/// Solde moyen des comptes.
+	measure 'Solde Moyen Comptes' = AVERAGE('dwh dim_compte'[solde_moyen])
+		formatString: #,##0.00
+		displayFolder: 02 Rentabilité
+		lineageTag: 9b045641-6d25-42ed-af47-130d59c3b9c1
+
+	/// Taux d'intérêt réellement appliqué au compte (pas le taux nominal du produit). Valeur déjà exprimée en points de pourcentage (ex. 2.5 = 2,5%) : ne pas appliquer un format %.
+	measure 'Taux Interet Moyen Pondere' = AVERAGEX('dwh dim_compte', 'dwh dim_compte'[taux_interet])
+		formatString: 0.00
+		displayFolder: 02 Rentabilité
+		lineageTag: 9c8daf4e-d4df-4b20-96e4-e03345fb6a84
+
+	/// Part des transactions marquées anomalie = 1.
+	measure 'Taux Anomalie' = DIVIDE(CALCULATE(COUNTROWS('dwh fact_transaction'), 'dwh fact_transaction'[anomalie] = 1), COUNTROWS('dwh fact_transaction'), 0)
+		formatString: 0.0%
+		displayFolder: 03 Comportement
+		lineageTag: 00351923-9d83-43c4-8963-8ecc85f5f785
+
+	/// Montant total des transactions à risque élevé, c.-à-d. dont risque_transaction >= 70 (même seuil que la colonne calculée Statut_Risque). Seuil à valider avec le métier.
+	measure 'Montant Total A Risque' = CALCULATE(SUM('dwh fact_transaction'[montant]), 'dwh fact_transaction'[risque_transaction] >= 70)
+		formatString: #,##0.00
+		displayFolder: 03 Comportement
+		lineageTag: 279cbc8f-d025-471f-87fa-61f795563193
+
+	/// Transactions où statut_transaction = "Rejetée". Valeur exacte à confirmer par un SELECT DISTINCT (voir vérification point par point, section 8 de la spec).
+	measure 'Nb Transactions Rejetees' = CALCULATE(COUNTROWS('dwh fact_transaction'), 'dwh fact_transaction'[statut_transaction] = "Rejetée")
+		formatString: #,##0
+		displayFolder: 03 Comportement
+		lineageTag: 61f8804a-2b16-46e8-b208-1fb94aa793ca
+
+	/// Score de risque moyen des transactions filtrées.
+	measure 'Score Risque Moyen' = AVERAGE('dwh fact_transaction'[risque_transaction])
+		formatString: 0.0
+		displayFolder: 03 Comportement
+		lineageTag: 852800cf-aa0d-4e12-8d31-9d6afccb4b9e
+
+	/// Version corrigée : inclut désormais les comptes jamais utilisés (derniere_transaction NULL), absents de la version initiale de la mesure.
+	measure 'Clients Inactifs 90j' =
+			VAR DateRef = CALCULATE(MAX('dwh dim_temps'[date]), ALL('dwh dim_temps'))
+			RETURN
+				CALCULATE(
+					DISTINCTCOUNT('dwh dim_compte'[id_client]),
+					FILTER(
+						'dwh dim_compte',
+						ISBLANK('dwh dim_compte'[derniere_transaction]) || DATEDIFF('dwh dim_compte'[derniere_transaction], DateRef, DAY) > 90
+					)
+				)
+		formatString: #,##0
+		displayFolder: 03 Comportement
+		lineageTag: 435bfe5e-1cd8-46c9-9323-13c83a709891
+
+	/// Volume de transactions par agence d'EXÉCUTION (où l'opération a eu lieu), via la relation directe fact_transaction->dim_agence qui a été mise inactive par défaut (activée ici via USERELATIONSHIP) pour éviter le cycle de relations avec dim_compte. Les autres mesures utilisent par défaut l'agence GESTIONNAIRE (via dim_compte).
+	measure 'Volume Transactions Agence Execution' = CALCULATE(COUNTROWS('dwh fact_transaction'), USERELATIONSHIP('dwh fact_transaction'[id_agence], 'dwh dim_agence'[id_agence]))
+		formatString: #,##0
+		displayFolder: 04 Vues alternatives
+		lineageTag: 2f7c1963-4338-4ee8-9e71-cb4689c2815b
+
+	column Colonne1
+		isNameInferred
+		sourceColumn: [Colonne1]
+
+	partition _Mesures = calculated
+		mode: import
+		source = ROW("Colonne1", 0)
+

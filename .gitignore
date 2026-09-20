@@ -1,0 +1,37 @@
+# ===== Secrets / identifiants =====
+.env
+.env.*
+!.env.example
+**/.streamlit/secrets.toml
+!**/.streamlit/secrets.toml.example
+*.pem
+*.key
+*.pfx
+credentials*.json
+service_account*.json
+
+# Données utilisateurs (comptes / mots de passe hachés)
+**/data/users.json
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.pyc.*
+.venv/
+venv/
+env/
+
+# ===== Power BI (cache local et réglages personnels) =====
+**/.pbi/cache.abf
+**/.pbi/localSettings.json
+*.pbix.bak
+
+# ===== Données volumineuses / potentiellement sensibles =====
+donnees_PFE_BI_Talend_reduit.xlsx
+*.csv.bak
+
+# ===== IDE / OS =====
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
