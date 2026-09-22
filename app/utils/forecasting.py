@@ -29,10 +29,45 @@ import streamlit as st
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from statsmodels.tsa.statespace.sarimax import SARIMAX
 
+from utils import data_config
+
+# ------------------------------------------------------------------------
+# Habillage des graphiques — couleurs alignées sur le thème sombre de
+# l'application (voir utils/ui.py) pour une intégration harmonieuse des
+# figures matplotlib dans l'interface, plutôt que des figures blanches par défaut.
+# ------------------------------------------------------------------------
+GRAPH_BG = "#151A24"        # fond de figure (= SURFACE du thème Streamlit)
+GRAPH_AXES_BG = "#10141F"   # fond de la zone de tracé
+GRAPH_TEXT = "#E6E9F2"
+GRAPH_GRID = "#252C3D"
+GRAPH_HISTO = "#4F7CFF"     # historique réel — bleu électrique
+GRAPH_HW = "#F59E0B"        # prévision Holt-Winters — ambre
+GRAPH_SARIMA = "#22D3EE"    # prévision SARIMA — cyan
+GRAPH_REEL_TEST = "#E6E9F2"  # réel (période de test) — quasi blanc, bien contrasté
+
+plt.rcParams.update(
+    {
+        "figure.facecolor": GRAPH_BG,
+        "axes.facecolor": GRAPH_AXES_BG,
+        "axes.edgecolor": GRAPH_GRID,
+        "axes.labelcolor": GRAPH_TEXT,
+        "text.color": GRAPH_TEXT,
+        "xtick.color": GRAPH_TEXT,
+        "ytick.color": GRAPH_TEXT,
+        "grid.color": GRAPH_GRID,
+        "legend.facecolor": GRAPH_BG,
+        "legend.edgecolor": GRAPH_GRID,
+        "legend.labelcolor": GRAPH_TEXT,
+    }
+)
+
 # ------------------------------------------------------------------------
 # Paramètres généraux (identiques au script d'origine)
 # ------------------------------------------------------------------------
-FICHIER_EXCEL_DEFAUT = r"C:\Users\user\Desktop\github\Plateforme Data & BI -- Detection de Fraude\donnees_ventes_ecommerce.xlsx"
+# Chemin du fichier de données : centralisé dans utils/data_config.py (au
+# lieu d'un chemin absolu propre à une machine), afin de rester valide quel
+# que soit l'endroit où le projet est cloné.
+FICHIER_EXCEL_DEFAUT = data_config.get_excel_path()
 FEUILLE = "fact_vente"
 COLONNE_DATE = "date"
 COLONNE_MONTANT = "montant"
@@ -178,32 +213,33 @@ def _formatter_axe_montant(ax):
 
 def figure_backtest(train, test, prev_hw_bt, prev_sarima_bt):
     fig, ax = plt.subplots(figsize=(11, 5.5))
-    ax.plot(train.index, train.values, color="tab:blue", linewidth=2, label="Historique (entraînement)")
-    ax.plot(test.index, test.values, color="black", linewidth=2.5, marker="o", markersize=4,
+    ax.plot(train.index, train.values, color=GRAPH_HISTO, linewidth=2, label="Historique (entraînement)")
+    ax.plot(test.index, test.values, color=GRAPH_REEL_TEST, linewidth=2.5, marker="o", markersize=4,
             label="Réel (période de test)")
-    ax.plot(test.index, prev_hw_bt.values, color="tab:orange", linewidth=2, linestyle="--",
+    ax.plot(test.index, prev_hw_bt.values, color=GRAPH_HW, linewidth=2, linestyle="--",
             marker="o", markersize=4, label="Prévu - Holt-Winters")
-    ax.plot(test.index, prev_sarima_bt.values, color="tab:green", linewidth=2, linestyle="--",
+    ax.plot(test.index, prev_sarima_bt.values, color=GRAPH_SARIMA, linewidth=2, linestyle="--",
             marker="s", markersize=4, label="Prévu - SARIMA")
-    ax.axvline(train.index[-1], color="gray", linestyle=":", linewidth=1)
+    ax.axvline(train.index[-1], color=GRAPH_GRID, linestyle=":", linewidth=1)
     ax.set_title("Validation des modèles (backtesting sur les 12 derniers mois connus)",
                  fontsize=12, fontweight="bold")
     ax.set_xlabel("Mois")
     ax.set_ylabel("Chiffre d'affaires net (TND)")
     _formatter_axe_montant(ax)
     ax.legend()
-    ax.grid(alpha=0.3)
+    ax.grid(alpha=0.25)
     fig.tight_layout()
     return fig
 
 
 def figure_prevision(serie_historique, previsions, nom_modele, intervalle=None,
-                      couleur_prevision="tab:orange", scores=None):
+                      couleur_prevision=None, scores=None):
+    couleur_prevision = couleur_prevision or GRAPH_HW
     previsions_reliees = pd.concat([serie_historique.iloc[[-1]], previsions])
 
     fig, ax = plt.subplots(figsize=(11, 5.5))
     ax.plot(serie_historique.index, serie_historique.values,
-            label="Historique réel", color="tab:blue", linewidth=2)
+            label="Historique réel", color=GRAPH_HISTO, linewidth=2)
     ax.plot(previsions_reliees.index, previsions_reliees.values,
             label=f"Prévision ({nom_modele})", color=couleur_prevision,
             linewidth=2, linestyle="--", marker="o", markersize=4)
@@ -213,7 +249,7 @@ def figure_prevision(serie_historique, previsions, nom_modele, intervalle=None,
         inter.loc[serie_historique.index[-1]] = [serie_historique.iloc[-1], serie_historique.iloc[-1]]
         inter = inter.sort_index()
         ax.fill_between(inter.index, inter.iloc[:, 0], inter.iloc[:, 1],
-                         color=couleur_prevision, alpha=0.15, label="Intervalle de confiance (80%)")
+                         color=couleur_prevision, alpha=0.18, label="Intervalle de confiance (80%)")
 
     if scores is not None:
         texte_score = (
@@ -223,16 +259,17 @@ def figure_prevision(serie_historique, previsions, nom_modele, intervalle=None,
             f"MAPE : {scores['MAPE (%)']:.1f}%"
         ).replace(",", " ")
         ax.text(0.02, 0.97, texte_score, transform=ax.transAxes, va="top", ha="left", fontsize=9,
-                bbox=dict(boxstyle="round", facecolor="white", edgecolor=couleur_prevision, alpha=0.9))
+                color=GRAPH_TEXT,
+                bbox=dict(boxstyle="round", facecolor=GRAPH_BG, edgecolor=couleur_prevision, alpha=0.95))
 
-    ax.axvline(serie_historique.index[-1], color="gray", linestyle=":", linewidth=1)
+    ax.axvline(serie_historique.index[-1], color=GRAPH_GRID, linestyle=":", linewidth=1)
     ax.set_title(f"Chiffre d'affaires mensuel net - {nom_modele}",
                  fontsize=12, fontweight="bold")
     ax.set_xlabel("Mois")
     ax.set_ylabel("Chiffre d'affaires net (TND)")
     _formatter_axe_montant(ax)
     ax.legend()
-    ax.grid(alpha=0.3)
+    ax.grid(alpha=0.25)
     fig.tight_layout()
     return fig
 
@@ -243,14 +280,14 @@ def figure_comparaison(serie_historique, prev_hw, prev_sarima, scores=None):
 
     fig, ax = plt.subplots(figsize=(11, 5.5))
     ax.plot(serie_historique.index, serie_historique.values,
-            label="Historique réel", color="tab:blue", linewidth=2)
+            label="Historique réel", color=GRAPH_HISTO, linewidth=2)
     ax.plot(prev_hw_reliee.index, prev_hw_reliee.values,
-            label="Prévision Holt-Winters", color="tab:orange",
+            label="Prévision Holt-Winters", color=GRAPH_HW,
             linewidth=2, linestyle="--", marker="o", markersize=4)
     ax.plot(prev_sarima_reliee.index, prev_sarima_reliee.values,
-            label="Prévision SARIMA", color="tab:green",
+            label="Prévision SARIMA", color=GRAPH_SARIMA,
             linewidth=2, linestyle="--", marker="s", markersize=4)
-    ax.axvline(serie_historique.index[-1], color="gray", linestyle=":", linewidth=1)
+    ax.axvline(serie_historique.index[-1], color=GRAPH_GRID, linestyle=":", linewidth=1)
 
     if scores is not None:
         texte_score = (
@@ -263,7 +300,8 @@ def figure_comparaison(serie_historique, prev_hw, prev_sarima, scores=None):
             f"MAPE {scores.loc['SARIMA (log)','MAPE (%)']:.1f}%"
         ).replace(",", " ")
         ax.text(0.02, 0.97, texte_score, transform=ax.transAxes, va="top", ha="left", fontsize=8.5,
-                bbox=dict(boxstyle="round", facecolor="white", edgecolor="gray", alpha=0.9))
+                color=GRAPH_TEXT,
+                bbox=dict(boxstyle="round", facecolor=GRAPH_BG, edgecolor=GRAPH_GRID, alpha=0.95))
 
     ax.set_title("Comparaison des 2 modèles de prévision - Chiffre d'affaires mensuel net",
                  fontsize=12, fontweight="bold")
@@ -271,7 +309,7 @@ def figure_comparaison(serie_historique, prev_hw, prev_sarima, scores=None):
     ax.set_ylabel("Chiffre d'affaires net (TND)")
     _formatter_axe_montant(ax)
     ax.legend()
-    ax.grid(alpha=0.3)
+    ax.grid(alpha=0.25)
     fig.tight_layout()
     return fig
 

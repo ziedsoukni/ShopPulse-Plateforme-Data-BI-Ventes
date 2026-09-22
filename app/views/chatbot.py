@@ -1,11 +1,12 @@
 """Vue Chatbot — assistant données (Gemini + pandas) affiché en panneau de discussion.
 
+Le fichier Excel du projet est connecté AUTOMATIQUEMENT au démarrage (chemin
+centralisé dans `utils/data_config.py`, aucune sélection manuelle requise).
 Gemini transforme la question en requête structurée, pandas calcule le vrai
-résultat sur le fichier Excel (jamais inventé par l'IA), puis Gemini reformule
-la réponse en français.
+résultat sur les données (jamais inventé par l'IA) ; si l'information
+demandée n'existe pas dans le fichier, l'assistant le dit clairement plutôt
+que de deviner.
 """
-import os
-
 import pandas as pd
 import streamlit as st
 from utils.ui import render_header
@@ -21,10 +22,11 @@ with side:
     st.markdown(
         """
         <div class="sp-card">
-            <h4 style="margin-top:0;">📊 Assistant données</h4>
-            <p style="font-size:14px; color:#555;">
+            <h4 style="margin-top:0;">🤖 Assistant ShopPulse</h4>
+            <p style="font-size:14px; color:var(--sp-text-secondary);">
                 Posez vos questions sur les clients, boutiques, produits, canaux
-                et ventes du projet.
+                et ventes du projet. Les réponses s'appuient uniquement sur les
+                données réellement présentes dans le fichier connecté.
             </p>
         </div>
         """,
@@ -38,19 +40,27 @@ with side:
 
 with chat_col:
     if api_key:
-        default_path = gemini_chat.EXCEL_PATH_DEFAUT
-        source = None
-        if os.path.exists(default_path):
-            source = default_path
-        else:
-            st.warning(f"⚠️ Fichier introuvable : `{default_path}`")
+        # Connexion automatique au fichier Excel du projet.
+        source = gemini_chat.EXCEL_PATH_DEFAUT
+        result = gemini_chat.load_data_safe(source)
+
+        if result.error:
+            st.error(f"⚠️ {result.error}")
             uploaded = st.file_uploader(
-                "Déposez le fichier Excel des données", type=["xlsx"], key="gemini_excel_uploader"
+                "Ou déposez le fichier Excel des données manuellement", type=["xlsx"],
+                key="gemini_excel_uploader",
             )
             if uploaded is not None:
-                source = uploaded.getvalue()
+                result = gemini_chat.load_data_safe(uploaded.getvalue())
+        else:
+            n_ventes = len(result.data["vente"]) if "vente" in result.data else None
+            detail = f" ({n_ventes:,} ventes)".replace(",", " ") if n_ventes is not None else ""
+            st.caption(f"🟢 Fichier `{result.source_label}` connecté automatiquement{detail}.")
+            if result.missing_sheets:
+                st.caption(f"⚠️ Feuilles absentes du fichier : {', '.join(result.missing_sheets)}")
 
-        if source is not None:
+        if result.ok:
+            data = result.data
             if "data_chat_history" not in st.session_state:
                 st.session_state["data_chat_history"] = []
 
@@ -61,7 +71,7 @@ with chat_col:
                 for entry in st.session_state["data_chat_history"]:
                     with st.chat_message("user", avatar="🧑"):
                         st.markdown(entry["question"])
-                    with st.chat_message("assistant", avatar="📊"):
+                    with st.chat_message("assistant", avatar="🤖"):
                         st.markdown(entry["answer"])
                         if entry.get("table") is not None:
                             st.dataframe(entry["table"], use_container_width=True)
@@ -72,16 +82,15 @@ with chat_col:
                 with chat_box:
                     with st.chat_message("user", avatar="🧑"):
                         st.markdown(question)
-                    with st.chat_message("assistant", avatar="📊"):
+                    with st.chat_message("assistant", avatar="🤖"):
                         table = None
-                        with st.spinner("Analyse..."):
+                        with st.spinner("Analyse des données..."):
                             try:
-                                data = gemini_chat.load_data(source)
-                                answer, result, kind, plan = gemini_chat.ask(question, data, api_key)
-                                if isinstance(result, (pd.DataFrame, pd.Series)):
-                                    table = result
+                                answer, result_val, kind, plan = gemini_chat.ask(question, data, api_key)
+                                if isinstance(result_val, (pd.DataFrame, pd.Series)):
+                                    table = result_val
                             except Exception as e:
-                                answer = f"⚠️ Erreur : {e}"
+                                answer = f"⚠️ Erreur inattendue : {e}"
                         st.markdown(answer)
                         if table is not None:
                             st.dataframe(table, use_container_width=True)

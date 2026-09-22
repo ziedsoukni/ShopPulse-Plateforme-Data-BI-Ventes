@@ -18,8 +18,12 @@ st.markdown("### 📊 Tableau de bord Power BI — ShopPulse Ventes e-commerce")
 if not POWERBI_URL:
     st.info("Collez l'URL d'intégration du rapport Power BI dans `POWERBI_URL` (`views/powerbi.py`).")
 else:
-    # Rapport affiché directement dans la page (iframe plein écran).
-    components.iframe(POWERBI_URL, height=820, scrolling=True)
+    # Rapport affiché dans un cadre habillé (fond + bordure arrondie) plutôt
+    # qu'en iframe brute posée directement sur le fond sombre de l'application :
+    # le rapport Power BI (thème clair, voir ThemeVentes.json) s'intègre ainsi
+    # proprement dans l'interface sombre du portail.
+    with st.container(key="powerbi_frame"):
+        components.iframe(POWERBI_URL, height=820, scrolling=True)
     st.caption(
         "Si le rapport n'apparaît pas, connectez-vous à Power BI dans ce navigateur "
         "(compte ayant accès au rapport) puis rechargez la page."

@@ -230,10 +230,10 @@ else:
 
             def _couleur_statut(val):
                 if val == "Élevé":
-                    return "background-color: #FBD5D5; color:#7A1F1F; font-weight:700;"
+                    return "background-color: rgba(244,63,94,0.16); color:#FCA5AF; font-weight:700;"
                 if val == "Moyen":
-                    return "background-color: #FDEFC8; color:#7A5B00;"
-                return "background-color: #DFF3E3; color:#1E5C33;"
+                    return "background-color: rgba(245,158,11,0.16); color:#FBBF24;"
+                return "background-color: rgba(16,185,129,0.16); color:#6EE7B7;"
 
             styler = resultats_df.style
             if hasattr(styler, "map"):

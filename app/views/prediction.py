@@ -74,7 +74,7 @@ if source is not None:
             st.pyplot(
                 forecasting.figure_prevision(
                     resultats["serie"], resultats["prev_hw"], "Holt-Winters",
-                    couleur_prevision="tab:orange", scores=scores,
+                    couleur_prevision=forecasting.GRAPH_HW, scores=scores,
                 ),
                 use_container_width=True,
             )
@@ -96,7 +96,7 @@ if source is not None:
                 forecasting.figure_prevision(
                     resultats["serie"], resultats["prev_sarima"], "SARIMA",
                     intervalle=resultats["intervalle_sarima"],
-                    couleur_prevision="tab:green", scores=scores,
+                    couleur_prevision=forecasting.GRAPH_SARIMA, scores=scores,
                 ),
                 use_container_width=True,
             )

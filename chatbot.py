@@ -47,7 +47,12 @@ def load_dotenv_simple(path=".env"):
 
 load_dotenv_simple()
 
-EXCEL_PATH = os.getenv("EXCEL_PATH", r"C:\Users\user\Desktop\github\Plateforme Data & BI -- Detection de Fraude\donnees_ventes_ecommerce.xlsx")
+# Chemin du fichier de données : par défaut, à côté de ce script (fonctionne
+# quel que soit l'endroit où le projet est cloné) ; surchargeable via la
+# variable d'environnement EXCEL_PATH (ou EXCEL_DATA_PATH, utilisée par
+# l'application Streamlit dans app/utils/data_config.py) sans toucher au code.
+_DEFAUT_EXCEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "donnees_ventes_ecommerce.xlsx")
+EXCEL_PATH = os.getenv("EXCEL_PATH") or os.getenv("EXCEL_DATA_PATH") or _DEFAUT_EXCEL_PATH
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  # <- lu depuis le fichier .env, ne jamais coller la clé ici
 GEMINI_MODEL = "gemini-3.6-flash"  # modèle gratuit rapide
 GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
