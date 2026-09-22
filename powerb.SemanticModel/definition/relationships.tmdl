@@ -1,67 +1,50 @@
 relationship 310032c5-8a5a-4633-ba27-71b6b64f4ee4
 	joinOnDateBehavior: datePartOnly
-	fromColumn: 'dwh dim_agence'.date_ouverture
+	fromColumn: dim_boutique.date_ouverture
 	toColumn: LocalDateTable_90775b1a-072d-4feb-9e81-ff9fb819771c.Date
 
 relationship 5033467d-81b5-460b-b33b-8eb58a3812b9
 	joinOnDateBehavior: datePartOnly
-	fromColumn: 'dwh dim_compte'.date_ouverture
+	fromColumn: dim_client.date_inscription
 	toColumn: LocalDateTable_143deb1f-8b17-45d1-979d-7487ab966ee2.Date
 
 relationship 609bb3b4-2a91-4ea7-ba0e-58872426b19c
 	joinOnDateBehavior: datePartOnly
-	fromColumn: 'dwh dim_compte'.date_cloture
+	fromColumn: dim_client.derniere_commande
 	toColumn: LocalDateTable_e7b1d40f-8dd6-4a90-846d-d9ce6e220d7b.Date
 
 relationship 06f31919-d54c-411e-af33-73eb031d5c61
 	joinOnDateBehavior: datePartOnly
-	fromColumn: 'dwh dim_compte'.derniere_transaction
+	fromColumn: dim_produit.date_lancement
 	toColumn: LocalDateTable_3505fb09-338e-4fe0-8b87-2f91fd690d4c.Date
 
 relationship 09e3e38b-39a3-4dce-b8d5-b04f63221934
 	joinOnDateBehavior: datePartOnly
-	fromColumn: 'dwh dim_temps'.date
+	fromColumn: dim_temps.date
 	toColumn: LocalDateTable_d3eb3556-9e47-45c7-976c-008a502fd35f.Date
 
 relationship 1058b79e-08ac-428d-a1cb-bd2e83eaac4b
 	joinOnDateBehavior: datePartOnly
-	fromColumn: 'dwh fact_transaction'.date
+	fromColumn: fact_vente.date
 	toColumn: LocalDateTable_d2647b0b-0081-42d6-a0d8-d32250c6cfbc.Date
 
 relationship e3e4bbd0-7dd2-4be1-a6d7-b2404df9a988
-	fromColumn: 'dwh dim_compte'.id_agence
-	toColumn: 'dwh dim_agence'.id_agence
-
-	annotation PBI_IsFromSource = FS
+	fromColumn: fact_vente.id_client
+	toColumn: dim_client.id_client
 
 relationship 2e62e7e2-f503-4d76-9d10-495c601f4315
-	fromColumn: 'dwh dim_compte'.id_client
-	toColumn: 'dwh dim_client'.id_client
-
-	annotation PBI_IsFromSource = FS
-
-relationship e4e979e5-88c3-4004-ac4a-4ac317516a8a
-	isActive: false
-	fromColumn: 'dwh fact_transaction'.id_agence
-	toColumn: 'dwh dim_agence'.id_agence
-
-	annotation PBI_IsFromSource = FS
-
-relationship 233268c0-47d0-4e85-84d1-8f018d066a22
-	fromColumn: 'dwh fact_transaction'.id_compte
-	toColumn: 'dwh dim_compte'.id_compte
-
-	annotation PBI_IsFromSource = FS
+	fromColumn: fact_vente.id_boutique
+	toColumn: dim_boutique.id_boutique
 
 relationship 3926ca94-0592-4ee1-982a-e7020339b615
-	fromColumn: 'dwh fact_transaction'.id_produit
-	toColumn: 'dwh dim_produit'.id_produit
-
-	annotation PBI_IsFromSource = FS
+	fromColumn: fact_vente.id_produit
+	toColumn: dim_produit.id_produit
 
 relationship 178e77b9-fe95-48e7-aeae-204d9d98e280
-	fromColumn: 'dwh fact_transaction'.sk_date
-	toColumn: 'dwh dim_temps'.sk_date
+	fromColumn: fact_vente.sk_date
+	toColumn: dim_temps.sk_date
 
-	annotation PBI_IsFromSource = FS
+relationship 233268c0-47d0-4e85-84d1-8f018d066a22
+	fromColumn: fact_vente.canal
+	toColumn: dim_canal.canal
 

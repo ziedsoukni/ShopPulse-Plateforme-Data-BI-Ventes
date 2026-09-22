@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh dim_compte"
+                      "Entity": "fact_vente"
                     }
                   },
-                  "Property": "type_compte"
+                  "Property": "mode_livraison"
                 }
               },
-              "queryRef": "dwh dim_compte.type_compte",
-              "nativeQueryRef": "type_compte",
+              "queryRef": "fact_vente.mode_livraison",
+              "nativeQueryRef": "mode_livraison",
               "active": true
             }
           ]
@@ -42,11 +42,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Nb Comptes Actifs"
+                  "Property": "Nb Commandes Livrees"
                 }
               },
-              "queryRef": "_Mesures.Nb Comptes Actifs",
-              "nativeQueryRef": "Nb Comptes Actifs"
+              "queryRef": "_Mesures.Nb Commandes Livrees",
+              "nativeQueryRef": "Nb Commandes Livrees"
             }
           ]
         }
@@ -59,7 +59,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Répartition des comptes par type'"
+                  "Value": "'Répartition des commandes par mode de livraison'"
                 }
               }
             }
@@ -81,7 +81,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

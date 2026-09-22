@@ -4,6 +4,7 @@ table 'Seuil Risque'
 	lineageTag: 0a9b4070-b974-4566-830d-641a7252f6ca
 
 	column Value
+		lineageTag: 8bc785c1-4a4d-4a52-9e9d-a7226992da4f
 		isNameInferred
 		sourceColumn: [Value]
 

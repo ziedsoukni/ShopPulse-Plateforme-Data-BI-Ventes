@@ -23,11 +23,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Taux Anomalie"
+                  "Property": "Taux Retour"
                 }
               },
-              "queryRef": "_Mesures.Taux Anomalie",
-              "nativeQueryRef": "Taux Anomalie"
+              "queryRef": "_Mesures.Taux Retour",
+              "nativeQueryRef": "Taux Retour"
             }
           ]
         }
@@ -40,7 +40,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Taux d\\'anomalie'"
+                  "Value": "'Taux de retour'"
                 }
               }
             }
@@ -62,7 +62,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

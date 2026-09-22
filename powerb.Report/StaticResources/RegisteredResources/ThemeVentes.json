@@ -1,0 +1,38 @@
+{
+  "name": "ThemeVentes",
+  "dataColors": [
+    "#0E9F8E",
+    "#F28C28",
+    "#2E86C1",
+    "#E5B800",
+    "#D6537B",
+    "#5B8C2A",
+    "#6C4AB6",
+    "#D64545"
+  ],
+  "background": "#FFFFFF",
+  "secondaryBackground": "#EAF5F3",
+  "firstLevelElements": "#0B3C49",
+  "secondLevelElements": "#2F5D66",
+  "thirdLevelElements": "#DCE6F1",
+  "fourthLevelElements": "#8FA5BD",
+  "tableAccent": "#0E9F8E",
+  "good": "#008300",
+  "neutral": "#8FA5BD",
+  "bad": "#e34948",
+  "textClasses": {
+    "title": {
+      "color": "#0B3C49",
+      "fontSize": 13
+    },
+    "header": {
+      "color": "#0B3C49"
+    },
+    "callout": {
+      "color": "#0B3C49"
+    },
+    "label": {
+      "color": "#2F5D66"
+    }
+  }
+}

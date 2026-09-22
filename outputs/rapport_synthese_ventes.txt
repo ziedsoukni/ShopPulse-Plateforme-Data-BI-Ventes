@@ -1,0 +1,15 @@
+======================================================================
+RAPPORT DE SYNTHESE - PREVISION DE L'ACTIVITE E-COMMERCE (ShopPulse)
+======================================================================
+
+--- Chiffre d'affaires net (TND) ---
+Modèle : SARIMA(1,1,0)(0,1,1)[12] sur log
+Fiabilité du modèle (backtest 12 mois) : MAPE = 10.8%
+Total réel 2025 : 4,019,376
+Total prévu 2026 : 6,826,468  (évolution vs 2025 : +69.8%)
+
+--- Nombre de commandes valides ---
+Modèle : SARIMA(1,1,0)(0,1,1)[12] sur log
+Fiabilité du modèle (backtest 12 mois) : MAPE = 6.8%
+Total réel 2025 : 10,922
+Total prévu 2026 : 16,808  (évolution vs 2025 : +53.9%)

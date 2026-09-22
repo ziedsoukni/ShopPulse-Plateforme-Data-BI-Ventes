@@ -1,0 +1,176 @@
+/// Dimension client.
+table dim_client
+	lineageTag: 104e3073-9883-58d1-b38e-1d7428b0c5f7
+
+	column id_client
+		dataType: string
+		lineageTag: ca190b7d-b142-55fb-8680-a8690521f04c
+		summarizeBy: none
+		sourceColumn: id_client
+
+		annotation SummarizationSetBy = Automatic
+
+	column nom
+		dataType: string
+		lineageTag: 6de77554-650d-58f2-b662-cd35f084ae8c
+		summarizeBy: none
+		sourceColumn: nom
+
+		annotation SummarizationSetBy = Automatic
+
+	column prenom
+		dataType: string
+		lineageTag: 84eaa8d2-8db2-5725-ad02-0098f3b9eead
+		summarizeBy: none
+		sourceColumn: prenom
+
+		annotation SummarizationSetBy = Automatic
+
+	column sexe
+		dataType: string
+		lineageTag: af44956c-33ec-53a8-be99-4ed25c6329f3
+		summarizeBy: none
+		sourceColumn: sexe
+
+		annotation SummarizationSetBy = Automatic
+
+	column age
+		dataType: int64
+		formatString: 0
+		lineageTag: 6a8a5128-166a-56bd-9238-17efd9c7d99c
+		summarizeBy: none
+		sourceColumn: age
+
+		annotation SummarizationSetBy = Automatic
+
+	column tranche_age
+		dataType: string
+		lineageTag: df80406f-be58-5c3f-92f1-5623486f2085
+		summarizeBy: none
+		sourceColumn: tranche_age
+
+		annotation SummarizationSetBy = Automatic
+
+	column ville
+		dataType: string
+		lineageTag: e26e0912-1e32-59e4-b9c3-c4d02854673d
+		summarizeBy: none
+		sourceColumn: ville
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: 4f979592-74df-5a7c-afff-7614b9d030b3
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal_acquisition
+		dataType: string
+		lineageTag: 523feddc-af14-5326-a1c7-f56fb1308efd
+		summarizeBy: none
+		sourceColumn: canal_acquisition
+
+		annotation SummarizationSetBy = Automatic
+
+	column accepte_newsletter
+		dataType: int64
+		formatString: 0
+		lineageTag: 07c61896-1327-5cff-b889-0a121feb749e
+		summarizeBy: none
+		sourceColumn: accepte_newsletter
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_inscription
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 99906220-fa15-5f0d-94fd-f033b6bbb3cf
+		summarizeBy: none
+		sourceColumn: date_inscription
+
+		variation Variation
+			isDefault
+			relationship: 5033467d-81b5-460b-b33b-8eb58a3812b9
+			defaultHierarchy: LocalDateTable_143deb1f-8b17-45d1-979d-7487ab966ee2.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column derniere_commande
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4a337131-8b72-5543-8d18-47cf01b6c3f6
+		summarizeBy: none
+		sourceColumn: derniere_commande
+
+		variation Variation
+			isDefault
+			relationship: 609bb3b4-2a91-4ea7-ba0e-58872426b19c
+			defaultHierarchy: LocalDateTable_e7b1d40f-8dd6-4a90-846d-d9ce6e220d7b.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column anciennete_client
+		dataType: int64
+		formatString: 0
+		lineageTag: 2de7ca4c-e2c0-51e0-86a6-17904e1586f5
+		summarizeBy: none
+		sourceColumn: anciennete_client
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre_commandes
+		dataType: int64
+		formatString: 0
+		lineageTag: c0bd6407-1478-5c2e-85bd-64f339895a0b
+		summarizeBy: none
+		sourceColumn: nombre_commandes
+
+		annotation SummarizationSetBy = Automatic
+
+	column valeur_client
+		dataType: double
+		lineageTag: ca385cf8-96d7-58ac-9213-3e8e517797cc
+		summarizeBy: none
+		sourceColumn: valeur_client
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column segment_client
+		dataType: string
+		lineageTag: 2d461ace-f538-5049-ad53-f04e400ea5c5
+		summarizeBy: none
+		sourceColumn: segment_client
+
+		annotation SummarizationSetBy = Automatic
+
+	column score_fidelite
+		dataType: int64
+		formatString: 0
+		lineageTag: cca9bbe6-169e-5521-9584-5af089033313
+		summarizeBy: none
+		sourceColumn: score_fidelite
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_client = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(FichierDonnees), null, true),
+				    Feuille = Source{[Item="dim_client",Kind="Sheet"]}[Data],
+				    Entetes = Table.PromoteHeaders(Feuille, [PromoteAllScalars=true]),
+				    Types = Table.TransformColumnTypes(Entetes, {{"id_client", type text}, {"nom", type text}, {"prenom", type text}, {"sexe", type text}, {"age", Int64.Type}, {"tranche_age", type text}, {"ville", type text}, {"region", type text}, {"canal_acquisition", type text}, {"accepte_newsletter", Int64.Type}, {"date_inscription", type date}, {"derniere_commande", type date}, {"anciennete_client", Int64.Type}, {"nombre_commandes", Int64.Type}, {"valeur_client", type number}, {"segment_client", type text}, {"score_fidelite", Int64.Type}}, "en-US")
+				in
+				    Types
+
+	annotation PBI_ResultType = Table
+

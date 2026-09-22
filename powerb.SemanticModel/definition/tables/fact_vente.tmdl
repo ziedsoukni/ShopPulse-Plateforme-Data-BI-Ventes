@@ -1,0 +1,222 @@
+/// Table de faits : une ligne par ligne de commande.
+table fact_vente
+	lineageTag: 80e6931d-5326-5a74-8420-07505e9da84f
+
+	column id_vente
+		dataType: string
+		lineageTag: d3a0b3d5-45f1-572e-bd0d-ab93445b49a0
+		summarizeBy: none
+		sourceColumn: id_vente
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 21b40c12-abc9-5199-a6c5-9db4686679fe
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 1058b79e-08ac-428d-a1cb-bd2e83eaac4b
+			defaultHierarchy: LocalDateTable_d2647b0b-0081-42d6-a0d8-d32250c6cfbc.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column heure
+		dataType: string
+		lineageTag: a2431613-be12-5d04-beed-19247361a1ae
+		summarizeBy: none
+		sourceColumn: heure
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_client
+		dataType: string
+		lineageTag: d6aea920-3735-54b3-9c4e-9173b097d5be
+		summarizeBy: none
+		sourceColumn: id_client
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_boutique
+		dataType: string
+		lineageTag: 8234e5c3-8054-5a5c-bdcc-dec478dd1862
+		summarizeBy: none
+		sourceColumn: id_boutique
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_produit
+		dataType: string
+		lineageTag: 0dc43990-4331-5107-9e0d-08ad15231467
+		summarizeBy: none
+		sourceColumn: id_produit
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_date
+		dataType: int64
+		formatString: 0
+		lineageTag: accbd5de-794a-522f-b3c1-e177793a764b
+		summarizeBy: none
+		sourceColumn: sk_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column canal
+		dataType: string
+		lineageTag: d21641c1-92c5-53c4-a324-16b6e4ace259
+		summarizeBy: none
+		sourceColumn: canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantite
+		dataType: int64
+		formatString: 0
+		lineageTag: 12b3f3c2-b8a0-5ccf-b07c-f943bb6ec43b
+		summarizeBy: sum
+		sourceColumn: quantite
+
+		annotation SummarizationSetBy = Automatic
+
+	column montant
+		dataType: double
+		lineageTag: 3c3e74d8-71ae-5299-8884-1650875358f7
+		summarizeBy: sum
+		sourceColumn: montant
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column remise
+		dataType: double
+		lineageTag: 1d3aeb3c-892e-5a34-99f3-3496cc0a76af
+		summarizeBy: sum
+		sourceColumn: remise
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cout_total
+		dataType: double
+		lineageTag: afec8faf-a15e-520a-9226-affd2706638c
+		summarizeBy: sum
+		sourceColumn: cout_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column frais_livraison
+		dataType: double
+		lineageTag: 52e6262b-02cb-5e3b-8658-5103021372f5
+		summarizeBy: sum
+		sourceColumn: frais_livraison
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column statut_commande
+		dataType: string
+		lineageTag: c8b5abc7-5bcb-5e72-90c9-aefbbcd8b462
+		summarizeBy: none
+		sourceColumn: statut_commande
+
+		annotation SummarizationSetBy = Automatic
+
+	column moyen_paiement
+		dataType: string
+		lineageTag: d52084f3-50f5-5086-ae29-b996da701617
+		summarizeBy: none
+		sourceColumn: moyen_paiement
+
+		annotation SummarizationSetBy = Automatic
+
+	column mode_livraison
+		dataType: string
+		lineageTag: 6463f70e-0a43-5053-b458-2082037c8bbf
+		summarizeBy: none
+		sourceColumn: mode_livraison
+
+		annotation SummarizationSetBy = Automatic
+
+	column delai_livraison
+		dataType: int64
+		formatString: 0
+		lineageTag: 96201f61-34f3-5690-b110-b914a7ceb9bd
+		summarizeBy: none
+		sourceColumn: delai_livraison
+
+		annotation SummarizationSetBy = Automatic
+
+	column motif_annulation
+		dataType: string
+		lineageTag: 55334335-321d-5374-a2c8-b13ea832f46e
+		summarizeBy: none
+		sourceColumn: motif_annulation
+
+		annotation SummarizationSetBy = Automatic
+
+	column note_client
+		dataType: int64
+		formatString: 0
+		lineageTag: d020c84e-bf52-5ac7-b505-eb579174dc6c
+		summarizeBy: none
+		sourceColumn: note_client
+
+		annotation SummarizationSetBy = Automatic
+
+	column score_risque_retour
+		dataType: int64
+		formatString: 0
+		lineageTag: ef6cd0a8-09e9-53d1-83a3-0b3c37c2ba51
+		summarizeBy: sum
+		sourceColumn: score_risque_retour
+
+		annotation SummarizationSetBy = Automatic
+
+	column retour
+		dataType: int64
+		formatString: 0
+		lineageTag: b94bb997-887a-527e-9ea3-e90718dcfc41
+		summarizeBy: sum
+		sourceColumn: retour
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Heure de la commande en entier (0-23), extraite de la colonne texte 'heure' (HH:MM:SS). Utilisée pour la carte de chaleur / le graphique par heure.
+	column Heure_Entiere = VALUE(LEFT(fact_vente[heure], 2))
+		dataType: int64
+		formatString: 0
+		displayFolder: Colonnes calculées
+		lineageTag: a979ab5c-54df-548a-b1be-5650a1947183
+		summarizeBy: none
+
+	/// Niveau de risque de retour lisible (Faible/Moyen/Élevé) dérivé de score_risque_retour. Seuils 40 et 70 (à ajuster avec le métier).
+	column Statut_Risque_Retour = SWITCH(TRUE(), fact_vente[score_risque_retour] < 40, "Faible", fact_vente[score_risque_retour] < 70, "Moyen", "Élevé")
+		dataType: string
+		displayFolder: Colonnes calculées
+		lineageTag: 8ca23f94-b80a-5be2-b97c-92d1bb21ff2d
+		summarizeBy: none
+
+	partition fact_vente = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(FichierDonnees), null, true),
+				    Feuille = Source{[Item="fact_vente",Kind="Sheet"]}[Data],
+				    Entetes = Table.PromoteHeaders(Feuille, [PromoteAllScalars=true]),
+				    Types = Table.TransformColumnTypes(Entetes, {{"id_vente", type text}, {"date", type date}, {"heure", type text}, {"id_client", type text}, {"id_boutique", type text}, {"id_produit", type text}, {"sk_date", Int64.Type}, {"canal", type text}, {"quantite", Int64.Type}, {"montant", type number}, {"remise", type number}, {"cout_total", type number}, {"frais_livraison", type number}, {"statut_commande", type text}, {"moyen_paiement", type text}, {"mode_livraison", type text}, {"delai_livraison", Int64.Type}, {"motif_annulation", type text}, {"note_client", Int64.Type}, {"score_risque_retour", Int64.Type}, {"retour", Int64.Type}}, "en-US")
+				in
+				    Types
+
+	annotation PBI_ResultType = Table
+

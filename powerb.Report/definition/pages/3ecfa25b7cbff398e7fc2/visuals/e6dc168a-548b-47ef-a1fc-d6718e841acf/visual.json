@@ -23,11 +23,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Frais Totaux Percus"
+                  "Property": "Marge Brute"
                 }
               },
-              "queryRef": "_Mesures.Frais Totaux Percus",
-              "nativeQueryRef": "Frais Totaux Percus"
+              "queryRef": "_Mesures.Marge Brute",
+              "nativeQueryRef": "Marge Brute"
             }
           ]
         }
@@ -40,7 +40,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Frais totaux perçus'"
+                  "Value": "'Marge brute'"
                 }
               }
             }
@@ -62,7 +62,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

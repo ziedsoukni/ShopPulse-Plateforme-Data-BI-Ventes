@@ -1,0 +1,6 @@
+/// Chemin du classeur Excel source (feuilles dim_client, dim_boutique, dim_produit, dim_temps, dim_canal, fact_vente). À adapter si le dossier est déplacé.
+expression FichierDonnees = "C:\Users\user\Desktop\github\Plateforme Data & BI -- Detection de Fraude\donnees_ventes_ecommerce.xlsx" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 6d83e863-2f06-5f0e-8bbe-396acfdb6c63
+
+	annotation PBI_ResultType = Text
+

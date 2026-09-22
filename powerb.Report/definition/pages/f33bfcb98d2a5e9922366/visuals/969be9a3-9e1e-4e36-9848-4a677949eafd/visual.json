@@ -23,11 +23,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Score Risque Moyen"
+                  "Property": "Score Risque Retour Moyen"
                 }
               },
-              "queryRef": "_Mesures.Score Risque Moyen",
-              "nativeQueryRef": "Score Risque Moyen"
+              "queryRef": "_Mesures.Score Risque Retour Moyen",
+              "nativeQueryRef": "Score Risque Retour Moyen"
             }
           ]
         }
@@ -40,7 +40,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Score de risque moyen'"
+                  "Value": "'Score de risque de retour moyen'"
                 }
               }
             }
@@ -62,7 +62,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

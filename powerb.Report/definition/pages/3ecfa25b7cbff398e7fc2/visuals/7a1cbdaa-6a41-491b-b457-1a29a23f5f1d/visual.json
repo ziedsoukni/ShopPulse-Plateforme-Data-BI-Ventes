@@ -23,11 +23,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Revenu Moyen Client"
+                  "Property": "CA Moyen Client"
                 }
               },
-              "queryRef": "_Mesures.Revenu Moyen Client",
-              "nativeQueryRef": "Revenu Moyen Client"
+              "queryRef": "_Mesures.CA Moyen Client",
+              "nativeQueryRef": "CA Moyen Client"
             }
           ]
         }
@@ -40,7 +40,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Revenu moyen par client'"
+                  "Value": "'CA moyen par client'"
                 }
               }
             }
@@ -62,7 +62,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

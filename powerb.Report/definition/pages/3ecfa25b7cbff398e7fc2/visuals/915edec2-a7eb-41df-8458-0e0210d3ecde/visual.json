@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh dim_client"
+                      "Entity": "dim_client"
                     }
                   },
                   "Property": "nom"
                 }
               },
-              "queryRef": "dwh dim_client.nom",
+              "queryRef": "dim_client.nom",
               "nativeQueryRef": "nom"
             },
             {
@@ -34,13 +34,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh dim_client"
+                      "Entity": "dim_client"
                     }
                   },
                   "Property": "prenom"
                 }
               },
-              "queryRef": "dwh dim_client.prenom",
+              "queryRef": "dim_client.prenom",
               "nativeQueryRef": "prenom"
             },
             {
@@ -48,13 +48,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh dim_client"
+                      "Entity": "dim_client"
                     }
                   },
                   "Property": "segment_client"
                 }
               },
-              "queryRef": "dwh dim_client.segment_client",
+              "queryRef": "dim_client.segment_client",
               "nativeQueryRef": "segment_client"
             },
             {
@@ -62,28 +62,28 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh dim_client"
+                      "Entity": "dim_client"
                     }
                   },
-                  "Property": "score_client"
+                  "Property": "score_fidelite"
                 }
               },
-              "queryRef": "dwh dim_client.score_client",
-              "nativeQueryRef": "score_client"
+              "queryRef": "dim_client.score_fidelite",
+              "nativeQueryRef": "score_fidelite"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh dim_client"
+                      "Entity": "dim_client"
                     }
                   },
-                  "Property": "revenu_mensuel"
+                  "Property": "valeur_client"
                 }
               },
-              "queryRef": "dwh dim_client.revenu_mensuel",
-              "nativeQueryRef": "revenu_mensuel"
+              "queryRef": "dim_client.valeur_client",
+              "nativeQueryRef": "valeur_client"
             }
           ]
         }
@@ -118,7 +118,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

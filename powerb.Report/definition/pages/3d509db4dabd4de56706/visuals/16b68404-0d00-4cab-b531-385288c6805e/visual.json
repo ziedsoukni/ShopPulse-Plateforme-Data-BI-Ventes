@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh fact_transaction"
+                      "Entity": "fact_vente"
                     }
                   },
                   "Property": "canal"
                 }
               },
-              "queryRef": "dwh fact_transaction.canal",
+              "queryRef": "fact_vente.canal",
               "nativeQueryRef": "canal",
               "active": true
             }
@@ -42,11 +42,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Nb Transactions"
+                  "Property": "Nb Commandes"
                 }
               },
-              "queryRef": "_Mesures.Nb Transactions",
-              "nativeQueryRef": "Nb Transactions"
+              "queryRef": "_Mesures.Nb Commandes",
+              "nativeQueryRef": "Nb Commandes"
             }
           ]
         }
@@ -59,7 +59,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Transactions par canal'"
+                  "Value": "'Commandes par canal'"
                 }
               }
             }
@@ -81,7 +81,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

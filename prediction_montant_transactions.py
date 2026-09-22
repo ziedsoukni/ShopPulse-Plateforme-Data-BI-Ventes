@@ -2,7 +2,7 @@
 prediction_montant_transactions.py
 ===================================
 
-Prévision du MONTANT TOTAL MENSUEL des transactions (somme des montants),
+Prévision du CHIFFRE D'AFFAIRES MENSUEL NET des ventes e-commerce (ShopPulse),
 avec DEUX modèles de séries temporelles différents :
 
     1. Holt-Winters (lissage exponentiel triple, tendance amortie + saisonnalité)
@@ -24,15 +24,15 @@ Pourquoi deux modèles ?
     comparaison / robustesse.
 
 Pourquoi une prévision sur log(montant) ?
-    Le montant total mensuel des transactions croît de façon quasi
-    exponentielle (digitalisation croissante des paiements). Travailler sur
+    Le chiffre d'affaires mensuel croît de façon quasi
+    exponentielle (croissance de la base clients et du trafic web). Travailler sur
     log(montant) transforme cette croissance exponentielle en tendance
     linéaire, ce que les deux modèles savent bien extrapoler. On repasse en
     échelle réelle avec exp() à la fin.
 
 Utilisation :
     python prediction_montant_transactions.py
-        -> cherche "donnees_PFE_BI_Talend_reduit.xlsx" dans le dossier courant
+        -> cherche "donnees_ventes_ecommerce.xlsx" dans le dossier courant
 
     python prediction_montant_transactions.py "chemin/vers/mon_fichier.xlsx"
         -> utilise ce fichier à la place
@@ -65,10 +65,12 @@ import matplotlib.pyplot as plt
 # ----------------------------------------------------------------------
 # CONFIGURATION
 # ----------------------------------------------------------------------
-DEFAULT_DATA_PATH = "donnees_PFE_BI_Talend_reduit.xlsx"
-SHEET_NAME = "TRANSACTION"
+DEFAULT_DATA_PATH = "donnees_ventes_ecommerce.xlsx"
+SHEET_NAME = "fact_vente"
 DATE_COL = "date"
 AMOUNT_COL = "montant"
+STATUS_COL = "statut_commande"
+EXCLUDED_STATUSES = ["Annulée", "Retournée"]   # CA net : hors annulées / retournées
 
 FORECAST_HORIZON = 12          # nombre de mois à prévoir dans le futur
 BACKTEST_HORIZON = 12          # taille (en mois) de chaque fenêtre de test
@@ -76,17 +78,17 @@ N_BACKTEST_FOLDS = 3           # nombre de fenêtres de validation glissante
 
 OUTPUT_DIR = Path("previsions_output")
 
-# Palette du portail STB (pour un graphique cohérent avec le reste du projet)
-COLOR_HIST = "#00517A"
-COLOR_HW = "#0077B3"
-COLOR_SARIMA = "#D4AF37"
+# Palette ShopPulse (pour un graphique cohérent avec le reste du projet)
+COLOR_HIST = "#0B3C49"
+COLOR_HW = "#0E9F8E"
+COLOR_SARIMA = "#F28C28"
 
 
 # ----------------------------------------------------------------------
 # CHARGEMENT DES DONNÉES
 # ----------------------------------------------------------------------
 def load_monthly_series(path: Path) -> pd.Series:
-    """Charge la feuille TRANSACTION et agrège le montant total par mois."""
+    """Charge la feuille fact_vente et agrège le CA net (hors annulées/retournées) par mois."""
     if not path.exists():
         raise FileNotFoundError(
             f"Fichier introuvable : {path}\n"
@@ -95,7 +97,8 @@ def load_monthly_series(path: Path) -> pd.Series:
             "python prediction_montant_transactions.py \"chemin\\vers\\fichier.xlsx\""
         )
 
-    df = pd.read_excel(path, sheet_name=SHEET_NAME, usecols=[DATE_COL, AMOUNT_COL])
+    df = pd.read_excel(path, sheet_name=SHEET_NAME, usecols=[DATE_COL, AMOUNT_COL, STATUS_COL])
+    df = df[~df[STATUS_COL].isin(EXCLUDED_STATUSES)]
     df[DATE_COL] = pd.to_datetime(df[DATE_COL])
 
     monthly = df.set_index(DATE_COL).resample("MS")[AMOUNT_COL].sum()
@@ -213,7 +216,7 @@ def main():
     data_path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(DEFAULT_DATA_PATH)
 
     print("=" * 78)
-    print("PRÉVISION DU MONTANT TOTAL MENSUEL DES TRANSACTIONS")
+    print("PRÉVISION DU CHIFFRE D'AFFAIRES MENSUEL NET")
     print("=" * 78)
 
     monthly = load_monthly_series(data_path)
@@ -287,8 +290,8 @@ def main():
     ax.fill_between(future_index, sar_lo, sar_hi, color=COLOR_SARIMA, alpha=0.15,
                      label="Intervalle de confiance 80% (SARIMA)")
     ax.axvline(monthly.index[-1], color="grey", linestyle=":", linewidth=1)
-    ax.set_title("Montant total des transactions — historique et prévision à 12 mois")
-    ax.set_ylabel("Montant (TND)")
+    ax.set_title("Chiffre d'affaires mensuel net — historique et prévision à 12 mois")
+    ax.set_ylabel("CA net (TND)")
     ax.legend()
     ax.grid(alpha=0.25)
     fig.tight_layout()

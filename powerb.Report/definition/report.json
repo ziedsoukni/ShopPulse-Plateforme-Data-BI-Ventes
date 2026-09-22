@@ -11,7 +11,7 @@
       "type": "SharedResources"
     },
     "customTheme": {
-      "name": "ThemeBleuPFE.json",
+      "name": "ThemeVentes.json",
       "reportVersionAtImport": {
         "visual": "2.12.0",
         "report": "3.4.0",
@@ -52,13 +52,13 @@
       "type": "RegisteredResources",
       "items": [
         {
-          "name": "ThemeBleuPFE.json",
-          "path": "ThemeBleuPFE.json",
+          "name": "ThemeVentes.json",
+          "path": "ThemeVentes.json",
           "type": "CustomTheme"
         },
         {
-          "name": "logo-stb.png",
-          "path": "logo-stb.png",
+          "name": "logo-ventes.png",
+          "path": "logo-ventes.png",
           "type": "Image"
         }
       ]

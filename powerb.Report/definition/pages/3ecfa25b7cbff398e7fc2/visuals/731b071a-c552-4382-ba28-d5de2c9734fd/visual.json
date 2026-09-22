@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh dim_produit"
+                      "Entity": "dim_produit"
                     }
                   },
-                  "Property": "type_produit"
+                  "Property": "categorie"
                 }
               },
-              "queryRef": "dwh dim_produit.type_produit",
-              "nativeQueryRef": "type_produit",
+              "queryRef": "dim_produit.categorie",
+              "nativeQueryRef": "categorie",
               "active": true
             }
           ]
@@ -42,11 +42,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Frais Totaux Percus"
+                  "Property": "Marge Brute"
                 }
               },
-              "queryRef": "_Mesures.Frais Totaux Percus",
-              "nativeQueryRef": "Frais Totaux Percus"
+              "queryRef": "_Mesures.Marge Brute",
+              "nativeQueryRef": "Marge Brute"
             }
           ]
         }
@@ -59,7 +59,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Rentabilité par catégorie de produit'"
+                  "Value": "'Marge par catégorie de produit'"
                 }
               }
             }
@@ -81,7 +81,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

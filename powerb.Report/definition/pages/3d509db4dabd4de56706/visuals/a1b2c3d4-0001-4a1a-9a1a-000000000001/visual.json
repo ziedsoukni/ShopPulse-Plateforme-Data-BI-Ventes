@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh dim_temps"
+                      "Entity": "dim_temps"
                     }
                   },
                   "Property": "date"
                 }
               },
-              "queryRef": "dwh dim_temps.date",
+              "queryRef": "dim_temps.date",
               "nativeQueryRef": "date",
               "active": true
             }
@@ -57,7 +57,7 @@
                 "From": [
                   {
                     "Name": "d",
-                    "Entity": "dwh dim_temps",
+                    "Entity": "dim_temps",
                     "Type": 0
                   }
                 ],
@@ -120,7 +120,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }
@@ -146,7 +146,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "dwh dim_temps"
+                "Entity": "dim_temps"
               }
             },
             "Property": "date"

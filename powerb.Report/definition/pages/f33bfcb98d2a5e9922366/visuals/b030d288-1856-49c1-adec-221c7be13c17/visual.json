@@ -20,27 +20,27 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh fact_transaction"
+                      "Entity": "fact_vente"
                     }
                   },
-                  "Property": "id_transaction"
+                  "Property": "id_vente"
                 }
               },
-              "queryRef": "dwh fact_transaction.id_transaction",
-              "nativeQueryRef": "id_transaction"
+              "queryRef": "fact_vente.id_vente",
+              "nativeQueryRef": "id_vente"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh fact_transaction"
+                      "Entity": "fact_vente"
                     }
                   },
                   "Property": "montant"
                 }
               },
-              "queryRef": "dwh fact_transaction.montant",
+              "queryRef": "fact_vente.montant",
               "nativeQueryRef": "montant"
             },
             {
@@ -48,27 +48,27 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh fact_transaction"
+                      "Entity": "fact_vente"
                     }
                   },
-                  "Property": "motif_rejet"
+                  "Property": "motif_annulation"
                 }
               },
-              "queryRef": "dwh fact_transaction.motif_rejet",
-              "nativeQueryRef": "motif_rejet"
+              "queryRef": "fact_vente.motif_annulation",
+              "nativeQueryRef": "motif_annulation"
             },
             {
               "field": {
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh fact_transaction"
+                      "Entity": "fact_vente"
                     }
                   },
                   "Property": "canal"
                 }
               },
-              "queryRef": "dwh fact_transaction.canal",
+              "queryRef": "fact_vente.canal",
               "nativeQueryRef": "canal"
             },
             {
@@ -76,14 +76,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh fact_transaction"
+                      "Entity": "fact_vente"
                     }
                   },
-                  "Property": "risque_transaction"
+                  "Property": "score_risque_retour"
                 }
               },
-              "queryRef": "dwh fact_transaction.risque_transaction",
-              "nativeQueryRef": "risque_transaction"
+              "queryRef": "fact_vente.score_risque_retour",
+              "nativeQueryRef": "score_risque_retour"
             }
           ]
         }
@@ -96,7 +96,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Table des alertes'"
+                  "Value": "'Table des commandes à surveiller'"
                 }
               }
             }
@@ -118,7 +118,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

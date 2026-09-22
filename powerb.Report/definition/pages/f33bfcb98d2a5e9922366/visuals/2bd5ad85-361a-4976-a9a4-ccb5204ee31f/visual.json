@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh fact_transaction"
+                      "Entity": "fact_vente"
                     }
                   },
                   "Property": "canal"
                 }
               },
-              "queryRef": "dwh fact_transaction.canal",
+              "queryRef": "fact_vente.canal",
               "nativeQueryRef": "canal",
               "active": true
             }
@@ -42,11 +42,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Taux Anomalie"
+                  "Property": "Taux Retour"
                 }
               },
-              "queryRef": "_Mesures.Taux Anomalie",
-              "nativeQueryRef": "Taux Anomalie"
+              "queryRef": "_Mesures.Taux Retour",
+              "nativeQueryRef": "Taux Retour"
             }
           ]
         }
@@ -59,7 +59,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Taux d\\'anomalie par canal'"
+                  "Value": "'Taux de retour par canal'"
                 }
               }
             }
@@ -81,7 +81,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

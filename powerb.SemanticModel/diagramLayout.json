@@ -13,7 +13,7 @@
             "x": 558.03104982724767,
             "y": -50
           },
-          "nodeIndex": "dwh dim_agence",
+          "nodeIndex": "dim_boutique",
           "nodeLineageTag": "934d2995-440b-4408-9291-4c7d80181f6e",
           "size": {
             "height": 300,
@@ -26,7 +26,7 @@
             "x": 842.41923676747808,
             "y": -24.69908923197363
           },
-          "nodeIndex": "dwh dim_client",
+          "nodeIndex": "dim_client",
           "nodeLineageTag": "f80a815a-6a05-44fb-b823-faba010a9cb3",
           "size": {
             "height": 300,
@@ -39,7 +39,7 @@
             "x": 683.858230703612,
             "y": 373.29621748932658
           },
-          "nodeIndex": "dwh dim_compte",
+          "nodeIndex": "dim_canal",
           "nodeLineageTag": "07c89654-ed73-45ff-8ade-ef4f1a68b35b",
           "size": {
             "height": 300,
@@ -52,7 +52,7 @@
             "x": 303.40627804304688,
             "y": 657.41081871793585
           },
-          "nodeIndex": "dwh dim_produit",
+          "nodeIndex": "dim_produit",
           "nodeLineageTag": "e5f9a6c1-38c4-43ea-9ab5-1d87a162b15e",
           "size": {
             "height": 300,
@@ -65,7 +65,7 @@
             "x": 50,
             "y": 303.64890160156949
           },
-          "nodeIndex": "dwh dim_temps",
+          "nodeIndex": "dim_temps",
           "nodeLineageTag": "cb1a10b2-cbbb-4190-9504-c23df2c0b60a",
           "size": {
             "height": 300,
@@ -78,7 +78,7 @@
             "x": 397.95130902621486,
             "y": 303.68402868715589
           },
-          "nodeIndex": "dwh fact_transaction",
+          "nodeIndex": "fact_vente",
           "nodeLineageTag": "a57b2714-037d-47bb-b746-6c4d67b399b8",
           "size": {
             "height": 300,

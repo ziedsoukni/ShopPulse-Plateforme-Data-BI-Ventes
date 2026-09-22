@@ -1,0 +1,43 @@
+/// Canaux de vente et famille (Digital / Physique / Partenaire).
+table dim_canal
+	lineageTag: 6b8451bc-2820-5792-b053-7c2b2b556071
+
+	column canal
+		dataType: string
+		lineageTag: 0efb4632-f616-5668-8c2a-3d533b74cae3
+		summarizeBy: none
+		sourceColumn: canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column famille_canal
+		dataType: string
+		lineageTag: 84014d96-201c-51bd-b6ad-38691d2e0f66
+		summarizeBy: none
+		sourceColumn: famille_canal
+
+		annotation SummarizationSetBy = Automatic
+
+	column cout_acquisition_moyen
+		dataType: double
+		lineageTag: af88b377-32e2-56e0-a48b-a6d8cee71b78
+		summarizeBy: none
+		sourceColumn: cout_acquisition_moyen
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_canal = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(FichierDonnees), null, true),
+				    Feuille = Source{[Item="dim_canal",Kind="Sheet"]}[Data],
+				    Entetes = Table.PromoteHeaders(Feuille, [PromoteAllScalars=true]),
+				    Types = Table.TransformColumnTypes(Entetes, {{"canal", type text}, {"famille_canal", type text}, {"cout_acquisition_moyen", type number}}, "en-US")
+				in
+				    Types
+
+	annotation PBI_ResultType = Table
+

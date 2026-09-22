@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh dim_client"
+                      "Entity": "dim_client"
                     }
                   },
                   "Property": "segment_client"
                 }
               },
-              "queryRef": "dwh dim_client.segment_client",
+              "queryRef": "dim_client.segment_client",
               "nativeQueryRef": "segment_client",
               "active": true
             }
@@ -70,7 +70,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }
@@ -96,7 +96,7 @@
           "Column": {
             "Expression": {
               "SourceRef": {
-                "Entity": "dwh dim_client"
+                "Entity": "dim_client"
               }
             },
             "Property": "segment_client"

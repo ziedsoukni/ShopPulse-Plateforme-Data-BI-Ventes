@@ -1,5 +1,5 @@
 """
-Chatbot PFE "intelligent" — comprend des questions formulées librement,
+Chatbot ShopPulse "intelligent" — comprend des questions formulées librement,
 grâce à l'API gratuite Google Gemini, mais ne laisse JAMAIS l'IA inventer
 un résultat : Gemini transforme la question en un PLAN structuré (JSON),
 et c'est Python/pandas qui calcule le vrai résultat sur le fichier Excel.
@@ -22,7 +22,7 @@ Configuration :
        (ou directement dans la variable GEMINI_API_KEY ci-dessous)
 
 Lancer :
-    python chatbot_excel_ia.py
+    python chatbot.py
 """
 
 import os
@@ -47,7 +47,7 @@ def load_dotenv_simple(path=".env"):
 
 load_dotenv_simple()
 
-EXCEL_PATH = os.getenv("EXCEL_PATH", r"C:\Users\user\Downloads\donnees_PFE_BI_Talend_reduit.xlsx")
+EXCEL_PATH = os.getenv("EXCEL_PATH", r"C:\Users\user\Desktop\github\Plateforme Data & BI -- Detection de Fraude\donnees_ventes_ecommerce.xlsx")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  # <- lu depuis le fichier .env, ne jamais coller la clé ici
 GEMINI_MODEL = "gemini-3.6-flash"  # modèle gratuit rapide
 GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
@@ -91,15 +91,16 @@ def load_data(path):
         raise FileNotFoundError(f"Fichier Excel introuvable : {path}")
     sheets = pd.read_excel(path, sheet_name=None)
     data = {
-        "client": sheets["CLIENT"],
-        "agence": sheets["AGENCE"],
-        "produit": sheets["PRODUIT"],
-        "compte": sheets["COMPTE"],
-        "calendrier": sheets["CALENDRIER"],
-        "transaction": sheets["TRANSACTION"],
+        "client": sheets["dim_client"],
+        "boutique": sheets["dim_boutique"],
+        "produit": sheets["dim_produit"],
+        "canaux": sheets["dim_canal"],
+        "calendrier": sheets["dim_temps"],
+        "vente": sheets["fact_vente"],
     }
-    data["transaction"]["date"] = pd.to_datetime(data["transaction"]["date"])
+    data["vente"]["date"] = pd.to_datetime(data["vente"]["date"])
     data["calendrier"]["date"] = pd.to_datetime(data["calendrier"]["date"])
+    data["vente"]["marge"] = data["vente"]["montant"] - data["vente"]["cout_total"]
     return data
 
 
@@ -114,12 +115,13 @@ def describe_schema(data):
 def known_categorical_values(data):
     return {
         "ville_client": sorted(data["client"]["ville"].dropna().unique().tolist()),
-        "ville_agence": sorted(data["agence"]["ville"].dropna().unique().tolist()),
+        "ville_boutique": sorted(data["boutique"]["ville"].dropna().unique().tolist()),
         "region": sorted(data["client"]["region"].dropna().unique().tolist()),
         "segment_client": sorted(data["client"]["segment_client"].dropna().unique().tolist()),
-        "canal": sorted(data["transaction"]["canal"].dropna().unique().tolist()),
-        "type_operation": sorted(data["transaction"]["type_operation"].dropna().unique().tolist()),
-        "statut_transaction": sorted(data["transaction"]["statut_transaction"].dropna().unique().tolist()),
+        "canal": sorted(data["vente"]["canal"].dropna().unique().tolist()),
+        "moyen_paiement": sorted(data["vente"]["moyen_paiement"].dropna().unique().tolist()),
+        "statut_commande": sorted(data["vente"]["statut_commande"].dropna().unique().tolist()),
+        "categorie": sorted(data["produit"]["categorie"].dropna().unique().tolist()),
     }
 
 
@@ -136,13 +138,14 @@ Valeurs catégorielles connues (utilise EXACTEMENT ces valeurs si elles apparais
 
 Format du JSON à produire (mets null pour tout champ non utilisé) :
 {{
-  "table": "client | agence | produit | compte | transaction",
+  "table": "client | boutique | produit | canaux | vente",
   "ville": null,
   "region": null,
   "segment_client": null,
   "canal": null,
-  "type_operation": null,
-  "statut_transaction": null,
+  "moyen_paiement": null,
+  "statut_commande": null,
+  "categorie": null,
   "year": null,
   "operation": "count | sum | mean | max | min | top_n | groupby_count",
   "value_column": null,
@@ -154,10 +157,10 @@ Format du JSON à produire (mets null pour tout champ non utilisé) :
 
 Règles :
 - "operation" = "count" pour "combien de...".
-- "operation" = "sum"/"mean"/"max"/"min" nécessite "value_column" (ex: "montant", "revenu_mensuel").
+- "operation" = "sum"/"mean"/"max"/"min" nécessite "value_column" (ex: "montant", "marge", "valeur_client").
 - "operation" = "top_n" pour "les N meilleurs/premiers/plus...", avec "value_column" = colonne de tri, "sort_desc"=true pour "les plus élevés", false pour "les plus bas", "limit" = N (5 par défaut), "display_columns" = colonnes utiles à afficher.
 - "operation" = "groupby_count" pour "répartition par...", avec "groupby_column" = la colonne de regroupement.
-- "ville" ne s'applique qu'aux tables ayant une colonne ville, ou à "transaction" (dans ce cas on filtre via l'agence).
+- "ville" ne s'applique qu'aux tables ayant une colonne ville, ou à "vente" (dans ce cas on filtre via la boutique).
 
 Question : {question}
 """
@@ -193,14 +196,19 @@ def execute_plan(data, plan: dict):
     if ville:
         if "ville" in df.columns:
             df = df[df["ville"] == ville]
-        elif "id_agence" in df.columns:
-            ids = data["agence"].loc[data["agence"]["ville"] == ville, "id_agence"]
-            df = df[df["id_agence"].isin(ids)]
+        elif "id_boutique" in df.columns:
+            ids = data["boutique"].loc[data["boutique"]["ville"] == ville, "id_boutique"]
+            df = df[df["id_boutique"].isin(ids)]
 
-    for key in ["region", "segment_client", "canal", "type_operation", "statut_transaction"]:
+    for key in ["region", "segment_client", "canal", "moyen_paiement", "statut_commande"]:
         val = plan.get(key)
         if val and key in df.columns:
             df = df[df[key] == val]
+
+    categorie = plan.get("categorie")
+    if categorie and "id_produit" in df.columns:
+        ids = data["produit"].loc[data["produit"]["categorie"] == categorie, "id_produit"]
+        df = df[df["id_produit"].isin(ids)]
 
     year = plan.get("year")
     if year and "date" in df.columns:

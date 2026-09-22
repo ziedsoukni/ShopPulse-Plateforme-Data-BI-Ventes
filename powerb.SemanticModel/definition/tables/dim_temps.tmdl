@@ -1,0 +1,131 @@
+table dim_temps
+	lineageTag: cb1a10b2-cbbb-4190-9504-c23df2c0b60a
+	dataCategory: Time
+
+	column sk_date
+		dataType: int64
+		formatString: 0
+		lineageTag: 85f09ce2-f10c-4def-be7f-010edc22a00a
+		summarizeBy: none
+		sourceColumn: sk_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		isUnique
+		formatString: Long Date
+		lineageTag: 76b4da00-3e65-4aae-a4b2-504f83596fbb
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 09e3e38b-39a3-4dce-b8d5-b04f63221934
+			defaultHierarchy: LocalDateTable_d3eb3556-9e47-45c7-976c-008a502fd35f.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column jour
+		dataType: int64
+		formatString: 0
+		lineageTag: bafefd71-a1c1-4e13-8511-f930a42d9107
+		summarizeBy: sum
+		sourceColumn: jour
+
+		annotation SummarizationSetBy = Automatic
+
+	column mois
+		dataType: int64
+		formatString: 0
+		lineageTag: b7395098-9867-4f27-b906-04de6f1982ed
+		summarizeBy: sum
+		sourceColumn: mois
+
+		annotation SummarizationSetBy = Automatic
+
+	column nom_mois
+		dataType: string
+		lineageTag: d0b4878d-b385-4f24-a06e-a0ae304ae3ea
+		summarizeBy: none
+		sourceColumn: nom_mois
+
+		annotation SummarizationSetBy = Automatic
+
+	column trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: fe169d69-7cae-41c6-9dbf-630a8098477c
+		summarizeBy: sum
+		sourceColumn: trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column annee
+		dataType: int64
+		formatString: 0
+		lineageTag: 9a2f7e37-c33c-4cf6-b3bb-a445599c7179
+		summarizeBy: sum
+		sourceColumn: annee
+
+		annotation SummarizationSetBy = Automatic
+
+	column semaine
+		dataType: int64
+		formatString: 0
+		lineageTag: 5295ea33-b5c4-478b-afd7-22c6713ad708
+		summarizeBy: sum
+		sourceColumn: semaine
+
+		annotation SummarizationSetBy = Automatic
+
+	column jour_semaine
+		dataType: string
+		lineageTag: d7aac9ee-d882-4e6f-aabc-fd0194d2b924
+		summarizeBy: none
+		sourceColumn: jour_semaine
+
+		annotation SummarizationSetBy = Automatic
+
+	column weekend
+		dataType: int64
+		formatString: 0
+		lineageTag: 68d0827c-3c41-418e-9b69-8de1e4c65ad6
+		summarizeBy: sum
+		sourceColumn: weekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column debut_mois
+		dataType: int64
+		formatString: 0
+		lineageTag: 054de1d2-0bfa-42a5-8c95-871db826436a
+		summarizeBy: sum
+		sourceColumn: debut_mois
+
+		annotation SummarizationSetBy = Automatic
+
+	column fin_mois
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a6914a6-8afd-4db0-9a6a-603ae7175d63
+		summarizeBy: sum
+		sourceColumn: fin_mois
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_temps = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(FichierDonnees), null, true),
+				    Feuille = Source{[Item="dim_temps",Kind="Sheet"]}[Data],
+				    Entetes = Table.PromoteHeaders(Feuille, [PromoteAllScalars=true]),
+				    Types = Table.TransformColumnTypes(Entetes, {{"sk_date", Int64.Type}, {"date", type date}, {"jour", Int64.Type}, {"mois", Int64.Type}, {"nom_mois", type text}, {"trimestre", Int64.Type}, {"annee", Int64.Type}, {"semaine", Int64.Type}, {"jour_semaine", type text}, {"weekend", Int64.Type}, {"debut_mois", Int64.Type}, {"fin_mois", Int64.Type}}, "en-US")
+				in
+				    Types
+
+	annotation PBI_ResultType = Table
+

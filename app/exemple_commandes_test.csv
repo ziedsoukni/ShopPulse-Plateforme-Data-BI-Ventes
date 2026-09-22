@@ -1,0 +1,84 @@
+id_client,montant,canal,categorie,moyen_paiement,remise,delai_livraison
+CLI0918,94.92,Magasin,Beauté & Santé,Carte bancaire,0.0,0
+CLI0218,43.45,Magasin,Alimentation,Espèces,4.83,0
+CLI0188,159.25,Magasin,Beauté & Santé,Carte bancaire,0.0,0
+CLI0998,310.23,Magasin,Sport & Loisirs,Carte bancaire,54.75,0
+CLI0477,163.07,Magasin,Beauté & Santé,Carte bancaire,108.72,7
+CLI1182,78.8,Magasin,Sport & Loisirs,Carte bancaire,0.0,0
+CLI1151,64.12,Magasin,Sport & Loisirs,Carte bancaire,16.03,0
+CLI0519,41.37,Magasin,Beauté & Santé,Espèces,10.34,0
+CLI0023,37.55,Site web,Alimentation,Paiement à la livraison,4.17,3
+CLI0532,41.02,Magasin,Alimentation,Wallet mobile,0.0,0
+CLI0618,337.06,Magasin,Sport & Loisirs,Espèces,59.48,0
+CLI0959,242.82,Magasin,Mode,Espèces,12.78,0
+CLI0247,983.03,Magasin,Électronique,Carte bancaire,109.23,0
+CLI0005,217.02,Magasin,Mode,Carte bancaire,24.11,0
+CLI0628,139.3,Magasin,Mode,Carte bancaire,0.0,0
+CLI1210,252.06,App mobile,Électronique,Carte bancaire,0.0,2
+CLI0297,93.76,Magasin,Alimentation,Wallet mobile,0.0,0
+CLI0573,77.68,Magasin,Sport & Loisirs,Carte bancaire,0.0,0
+CLI1189,90.69,Site web,Alimentation,Carte bancaire,38.87,1
+CLI0338,37.04,Magasin,Alimentation,Carte bancaire,0.0,0
+CLI1099,83.98,App mobile,Sport & Loisirs,Carte bancaire,0.0,2
+CLI0089,74.46,Magasin,Alimentation,Carte bancaire,18.62,0
+CLI0487,71.04,Magasin,Sport & Loisirs,Espèces,7.89,0
+CLI0173,140.19,Magasin,Beauté & Santé,Espèces,0.0,2
+CLI0050,80.33,Magasin,Sport & Loisirs,Carte bancaire,0.0,0
+CLI1062,260.8,App mobile,Électronique,Paiement à la livraison,0.0,2
+CLI1003,187.39,App mobile,Mode,Carte bancaire,9.86,5
+CLI0992,253.55,Site web,Mode,Paiement à la livraison,0.0,1
+CLI0084,80.6,Magasin,Alimentation,Carte bancaire,8.95,2
+CLI1075,220.53,Marketplace,Mode,Paiement à la livraison,0.0,3
+CLI1073,97.05,Magasin,Beauté & Santé,Carte bancaire,0.0,0
+CLI0449,128.77,Marketplace,Alimentation,Paiement à la livraison,0.0,4
+CLI0121,217.91,Site web,Mode,Paiement à la livraison,38.46,7
+CLI0596,117.54,Magasin,Mode,Carte bancaire,0.0,0
+CLI0069,2072.34,App mobile,Maison & Déco,Wallet mobile,230.26,2
+CLI0188,55.34,Site web,Beauté & Santé,Wallet mobile,0.0,5
+CLI0713,215.58,Magasin,Mode,Carte bancaire,0.0,0
+CLI0615,234.3,Magasin,Mode,Carte bancaire,0.0,0
+CLI1112,37.78,Magasin,Alimentation,Carte bancaire,6.67,0
+CLI1315,162.64,Magasin,Alimentation,Espèces,40.66,0
+CLI0241,260.57,Magasin,Sport & Loisirs,Wallet mobile,0.0,0
+CLI1008,409.63,Magasin,Mode,Espèces,0.0,3
+CLI0425,383.57,Magasin,Mode,Carte bancaire,0.0,0
+CLI1412,179.58,Magasin,Mode,Carte bancaire,19.95,0
+CLI0503,59.22,Magasin,Alimentation,Espèces,3.12,3
+CLI1038,282.37,Magasin,Beauté & Santé,Espèces,0.0,0
+CLI0109,158.25,Magasin,Beauté & Santé,Wallet mobile,8.33,0
+CLI0765,258.88,Site web,Électronique,Paiement à la livraison,0.0,3
+CLI0465,222.48,Magasin,Mode,Wallet mobile,0.0,2
+CLI0446,2116.49,Marketplace,Électronique,Paiement à la livraison,0.0,7
+CLI0860,224.83,Magasin,Mode,Carte bancaire,0.0,0
+CLI0637,38.39,Site web,Alimentation,Paiement à la livraison,2.02,5
+CLI1330,91.19,Magasin,Beauté & Santé,Carte bancaire,0.0,0
+CLI0744,109.35,Magasin,Alimentation,Carte bancaire,0.0,2
+CLI1100,1733.45,Site web,Électronique,Carte bancaire,0.0,5
+CLI0126,1754.1,Site web,Électronique,Carte bancaire,0.0,5
+CLI0192,70.71,App mobile,Beauté & Santé,Carte bancaire,0.0,4
+CLI0843,114.36,Magasin,Beauté & Santé,Carte bancaire,0.0,0
+CLI0998,973.78,Magasin,Mode,Espèces,51.25,2
+CLI0196,231.73,Magasin,Sport & Loisirs,Carte bancaire,0.0,0
+CLI1024,237.48,Site web,Alimentation,Carte bancaire,0.0,4
+CLI1245,558.77,Magasin,Maison & Déco,Carte bancaire,239.48,4
+CLI0297,259.08,Magasin,Électronique,Carte bancaire,0.0,0
+CLI0819,128.14,Magasin,Maison & Déco,Wallet mobile,22.61,0
+CLI0521,77.13,Site web,Sport & Loisirs,Wallet mobile,4.06,1
+CLI0111,136.13,Magasin,Mode,Carte bancaire,0.0,0
+CLI1221,149.13,Site web,Mode,Carte bancaire,0.0,6
+CLI0054,155.34,Magasin,Beauté & Santé,Carte bancaire,0.0,0
+CLI0400,90.08,Marketplace,Beauté & Santé,Carte bancaire,0.0,5
+CLI1479,1454.38,Site web,Sport & Loisirs,Paiement à la livraison,161.6,1
+CLI0505,328.13,Magasin,Sport & Loisirs,Espèces,17.27,0
+CLI0841,1777.33,Magasin,Maison & Déco,Carte bancaire,197.48,0
+CLI0308,441.99,Magasin,Maison & Déco,Espèces,78.0,0
+CLI0018,41.67,Marketplace,Alimentation,Carte bancaire,2.19,6
+CLI0401,55.7,Magasin,Beauté & Santé,Espèces,0.0,0
+CLI0938,370.27,Site web,Sport & Loisirs,Wallet mobile,0.0,3
+CLI0485,105.74,App mobile,Alimentation,Carte bancaire,0.0,3
+CLI0753,70.55,Marketplace,Beauté & Santé,Paiement à la livraison,0.0,5
+CLI1093,373.63,Magasin,Sport & Loisirs,Carte bancaire,0.0,0
+CLI1153,147.6,Magasin,Alimentation,Carte bancaire,0.0,0
+CLI0101,189.9,Réseaux sociaux,Mode,Paiement à la livraison,80.0,7
+CLI0450,240.0,Réseaux sociaux,Mode,Paiement à la livraison,110.0,6
+CLI0777,2200.0,Marketplace,Électronique,Paiement à la livraison,0.0,6

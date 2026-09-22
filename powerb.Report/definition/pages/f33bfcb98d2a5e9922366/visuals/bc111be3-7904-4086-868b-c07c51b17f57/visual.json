@@ -20,13 +20,13 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "dwh dim_agence"
+                      "Entity": "dim_boutique"
                     }
                   },
                   "Property": "region"
                 }
               },
-              "queryRef": "dwh dim_agence.region",
+              "queryRef": "dim_boutique.region",
               "nativeQueryRef": "region",
               "active": true
             }
@@ -42,11 +42,11 @@
                       "Entity": "_Mesures"
                     }
                   },
-                  "Property": "Nb Transactions Rejetees"
+                  "Property": "Nb Commandes Annulees"
                 }
               },
-              "queryRef": "_Mesures.Nb Transactions Rejetees",
-              "nativeQueryRef": "Nb Transactions Rejetees"
+              "queryRef": "_Mesures.Nb Commandes Annulees",
+              "nativeQueryRef": "Nb Commandes Annulees"
             }
           ]
         }
@@ -59,7 +59,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Transactions rejetées par région'"
+                  "Value": "'Commandes annulées par région'"
                 }
               }
             }
@@ -81,7 +81,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#DCE9F7'"
+                      "Value": "'#E4F2EF'"
                     }
                   }
                 }

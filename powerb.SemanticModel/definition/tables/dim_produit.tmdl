@@ -1,0 +1,109 @@
+/// Catalogue produits.
+table dim_produit
+	lineageTag: d126f5a9-1d6d-59e3-9d5b-6150915de54b
+
+	column id_produit
+		dataType: string
+		lineageTag: a0705df1-79a4-5346-aa53-9593b646332c
+		summarizeBy: none
+		sourceColumn: id_produit
+
+		annotation SummarizationSetBy = Automatic
+
+	column code_produit
+		dataType: string
+		lineageTag: a09f53c3-1017-5af2-87a4-8b7558443689
+		summarizeBy: none
+		sourceColumn: code_produit
+
+		annotation SummarizationSetBy = Automatic
+
+	column nom_produit
+		dataType: string
+		lineageTag: 2d1d5e42-0d63-5dee-8d7e-ca3b695083f0
+		summarizeBy: none
+		sourceColumn: nom_produit
+
+		annotation SummarizationSetBy = Automatic
+
+	column categorie
+		dataType: string
+		lineageTag: 860be413-a91c-58af-8874-da814bc4694e
+		summarizeBy: none
+		sourceColumn: categorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column sous_categorie
+		dataType: string
+		lineageTag: c7e033ca-aad6-572c-a008-0ace55a7a56a
+		summarizeBy: none
+		sourceColumn: sous_categorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column marque
+		dataType: string
+		lineageTag: bdfe5bf5-2622-58dd-b635-0c3709911ebd
+		summarizeBy: none
+		sourceColumn: marque
+
+		annotation SummarizationSetBy = Automatic
+
+	column prix_unitaire
+		dataType: double
+		lineageTag: 674d3fce-467d-5317-9edf-888cc560e1e1
+		summarizeBy: none
+		sourceColumn: prix_unitaire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column cout_unitaire
+		dataType: double
+		lineageTag: ec3b83f1-e097-5a88-96e9-87444256952a
+		summarizeBy: none
+		sourceColumn: cout_unitaire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column statut
+		dataType: string
+		lineageTag: 727011a4-e81b-526f-8542-754c4c83d08c
+		summarizeBy: none
+		sourceColumn: statut
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_lancement
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b1a48ccc-39ea-582d-94bf-00647e66c516
+		summarizeBy: none
+		sourceColumn: date_lancement
+
+		variation Variation
+			isDefault
+			relationship: 06f31919-d54c-411e-af33-73eb031d5c61
+			defaultHierarchy: LocalDateTable_3505fb09-338e-4fe0-8b87-2f91fd690d4c.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dim_produit = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents(FichierDonnees), null, true),
+				    Feuille = Source{[Item="dim_produit",Kind="Sheet"]}[Data],
+				    Entetes = Table.PromoteHeaders(Feuille, [PromoteAllScalars=true]),
+				    Types = Table.TransformColumnTypes(Entetes, {{"id_produit", type text}, {"code_produit", type text}, {"nom_produit", type text}, {"categorie", type text}, {"sous_categorie", type text}, {"marque", type text}, {"prix_unitaire", type number}, {"cout_unitaire", type number}, {"statut", type text}, {"date_lancement", type date}}, "en-US")
+				in
+				    Types
+
+	annotation PBI_ResultType = Table
+
