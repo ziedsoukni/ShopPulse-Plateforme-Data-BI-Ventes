@@ -18,7 +18,7 @@ Puis ouvrez l'URL affichée (en général http://localhost:8501).
 | Identifiant | Mot de passe | Rôle  |
 |-------------|--------------|-------|
 | `admin`     | `admin123`   | Admin |
-| `agent`     | `agent2025`    | Agent |
+| `agent`     | `agent2025`  | Agent |
 
 ⚠️ **À faire avant toute mise en production** : remplacez `utils/auth.py` par une vraie
 source d'authentification (base de données, LDAP, SSO...) et ne laissez jamais de mots
@@ -64,7 +64,7 @@ est introuvable, la page propose de le téléverser. Les données sont **synthé
 
 ## 📊 Page Power BI
 
-Publiez `powerb.pbip` dans le service Power BI, copiez l'URL d'intégration et collez-la dans
+Ouvrez `powerbiecom.pbip` dans Power BI Desktop, publiez-le dans le service Power BI, copiez l'URL d'intégration et collez-la dans
 `POWERBI_URL` (`views/powerbi.py`).
 
 ## 🔮 Page Prévision
@@ -79,5 +79,5 @@ reçoit un score de 0 à 100 et une explication ; les seuils (40 / 70) sont ceux
 
 ## 💬 Assistant données
 
-Nécessite une clé Gemini : ajoutez `GEMINI_API_KEY` dans `.streamlit/secrets.toml`
+Nécessite une clé API Gemini : ajoutez `GEMINI_API_KEY` dans `.streamlit/secrets.toml`
 (modèle : `.streamlit/secrets.toml.example`).

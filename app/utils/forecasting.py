@@ -1,6 +1,6 @@
 """Prévision du chiffre d'affaires mensuel net des ventes e-commerce (Holt-Winters + SARIMA).
 
-Adapté du script `Untitled-1.py` du projet ShopPulse (ventes e-commerce) pour une intégration directe
+Version Streamlit du module de prévision du projet ShopPulse (ventes e-commerce), pour une intégration directe
 dans Streamlit : mêmes modèles, mêmes paramètres fixes, mais les fonctions
 retournent des DataFrames / figures matplotlib au lieu d'écrire des fichiers
 sur disque, et le calcul est mis en cache par Streamlit (st.cache_data).

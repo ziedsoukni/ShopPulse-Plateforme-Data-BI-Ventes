@@ -31,3 +31,6 @@ Thumbs.db
 *.db
 *.sqlite
 *.sqlite3
+
+# Comptes utilisateurs locaux (générés au premier lancement)
+**/data/users.json

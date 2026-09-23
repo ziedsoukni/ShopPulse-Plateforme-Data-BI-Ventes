@@ -1,8 +1,0 @@
-streamlit>=1.36
-pandas
-numpy
-anthropic
-openpyxl
-statsmodels
-matplotlib
-streamlit-float
